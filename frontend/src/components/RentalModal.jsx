@@ -283,7 +283,7 @@ export default function RentalModal({ outfit, onClose, onNavigateTab }) {
       prefill: {
         name: customerName,
         email: formData.email || "customer@example.com",
-        contact: formData.mobile || "9876543210"
+        contact: formData.mobile || "6354793852"
       },
       notes: {
         outfitId: outfit.id,
@@ -820,7 +820,7 @@ export default function RentalModal({ outfit, onClose, onNavigateTab }) {
                       </div>
                       <div className="summary-line">
                         <span>Helpline Contact:</span>
-                        <strong>+91 98765 43210 (Stylist Desk)</strong>
+                        <strong>+91 6354 793 852 (Stylist Desk)</strong>
                       </div>
                     </div>
 
