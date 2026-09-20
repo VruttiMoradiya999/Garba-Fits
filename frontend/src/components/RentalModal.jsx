@@ -807,10 +807,6 @@ export default function RentalModal({ outfit, onClose, onNavigateTab }) {
                         <strong>{outfit.name}</strong>
                       </div>
                       <div className="summary-line">
-                        <span>Trial Dates:</span>
-                        <strong>{formatDisplayDates(selectedDates)}</strong>
-                      </div>
-                      <div className="summary-line">
                         <span>Fitting Location:</span>
                         <strong>{formData.location}</strong>
                       </div>
