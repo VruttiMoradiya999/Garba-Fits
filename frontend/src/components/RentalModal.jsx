@@ -640,24 +640,14 @@ export default function RentalModal({ outfit, onClose, onNavigateTab }) {
                     )}
                   </div>
 
-                  {/* Lock Indicator Banner when OTP is not verified */}
-                  {!otpVerified && (
-                    <div className="otp-lock-banner">
-                      <span className="lock-icon">🔒</span>
-                      <span>Please verify your mobile number with OTP above to unlock the email & delivery fields.</span>
-                    </div>
-                  )}
-
                   {/* Email (Unlocked only after OTP is verified) */}
                   <div className={`form-field-group ${!otpVerified ? 'field-locked' : ''}`}>
-                    <label>
-                      Email Address * {!otpVerified && <span className="locked-tag">(Locked)</span>}
-                    </label>
+                    <label>Email Address *</label>
                     <input
                       type="email"
                       required={otpVerified}
                       disabled={!otpVerified}
-                      placeholder={otpVerified ? "Enter your email address" : "Unlock by verifying mobile number"}
+                      placeholder="Enter your email address"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     />
@@ -665,15 +655,13 @@ export default function RentalModal({ outfit, onClose, onNavigateTab }) {
 
                   {/* Location / Campus Address (Unlocked only after OTP is verified) */}
                   <div className={`form-field-group ${!otpVerified ? 'field-locked' : ''}`}>
-                    <label>
-                      Delivery / Fitting Location * {!otpVerified && <span className="locked-tag">(Locked)</span>}
-                    </label>
+                    <label>Delivery / Fitting Location *</label>
                     <div className="input-location-wrap">
                       <input
                         type="text"
                         required={otpVerified}
                         disabled={!otpVerified}
-                        placeholder={otpVerified ? "Enter hostel / room / campus address" : "Unlock by verifying mobile number"}
+                        placeholder="Enter delivery / fitting location"
                         value={formData.location}
                         onChange={(e) => setFormData({ ...formData, location: e.target.value })}
                       />
