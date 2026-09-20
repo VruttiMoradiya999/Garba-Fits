@@ -1483,41 +1483,98 @@
   bottom: 4px;
 }
 
-/* ── Calendar Total Amount Bar below Calendar ── */
-.calendar-total-amount-bar {
+/* ── Calendar Pricing & Action Grid below Calendar ── */
+.calendar-pricing-action-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 14px;
   background: #FFF8F9;
-  border: 1.5px solid rgba(227, 174, 186, 0.5);
-  border-radius: 14px;
+  border: 1.5px solid rgba(227, 174, 186, 0.55);
+  border-radius: 16px;
   padding: 12px 16px;
-  display: flex;
   align-items: center;
-  justify-content: space-between;
+  margin-top: 4px;
 }
 
-.total-amount-left {
+.pricing-breakdown-left {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  width: 100%;
+  gap: 6px;
+  border-right: 1.5px solid rgba(227, 174, 186, 0.45);
+  padding-right: 14px;
 }
 
-.total-amount-label {
-  font-size: 0.82rem;
+.pricing-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.86rem;
+}
+
+.pricing-label {
   color: #6E7485;
-  font-weight: 500;
-}
-
-.total-amount-val {
-  font-size: 1.05rem;
-  color: var(--color-charcoal);
   font-weight: 600;
+  font-size: 0.82rem;
 }
 
-.total-amount-val strong {
+.pricing-value {
+  color: var(--color-charcoal);
+  font-weight: 700;
+  font-size: 0.92rem;
+}
+
+.pricing-sub {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: #8C92A4;
+}
+
+.pricing-action-right {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pricing-total-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pricing-total-label {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--color-charcoal);
+}
+
+.pricing-total-value {
   color: var(--color-rose);
   font-size: 1.22rem;
   font-weight: 800;
-  margin-left: 4px;
+}
+
+.pricing-pay-box .pay-action-btn {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 0.88rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+@media (max-width: 600px) {
+  .calendar-pricing-action-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .pricing-breakdown-left {
+    border-right: none;
+    border-bottom: 1.5px solid rgba(227, 174, 186, 0.45);
+    padding-right: 0;
+    padding-bottom: 8px;
+  }
 }
 
 @media (max-width: 680px) {

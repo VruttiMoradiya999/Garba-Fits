@@ -456,24 +456,46 @@ export default function RentalModal({ outfit, onClose, onNavigateTab }) {
                       </div>
                     </div>
 
-                    {/* Total Amount below calendar */}
-                    <div className="calendar-total-amount-bar">
-                      <div className="total-amount-val">
-                        Total Amount: <strong>₹{numNights > 0 ? (numNights * pricePerNight).toLocaleString() : '0'}</strong>
+                    {/* Bottom Pricing Breakdown & Checkout Action */}
+                    <div className="calendar-pricing-action-grid">
+                      {/* Left Side Div: 1st Rent & 2nd Deposit from products.json */}
+                      <div className="pricing-breakdown-left">
+                        <div className="pricing-item">
+                          <span className="pricing-label">Rent:</span>
+                          <strong className="pricing-value">
+                            ₹{numNights > 0 ? (numNights * pricePerNight).toLocaleString() : pricePerNight.toLocaleString()}
+                            <span className="pricing-sub">{numNights > 0 ? ` (${numNights} ${numNights === 1 ? 'Night' : 'Nights'})` : ' / Night'}</span>
+                          </strong>
+                        </div>
+                        <div className="pricing-item">
+                          <span className="pricing-label">Deposit:</span>
+                          <strong className="pricing-value">
+                            ₹{(outfit?.deposit || 2000).toLocaleString()}
+                            <span className="pricing-sub"> (Refundable)</span>
+                          </strong>
+                        </div>
                       </div>
-                    </div>
 
-                    {/* Button below Total Amount */}
-                    <div className="step-actions-footer">
-                      <button
-                        type="button"
-                        className="btn-primary step-btn-next btn-theme-rose"
-                        disabled={selectedDates.length === 0}
-                        onClick={() => goToStep(2, 'next')}
-                      >
-                        <span>Select Payment Method</span>
-                        <ArrowRightIcon size={16} />
-                      </button>
+                      {/* Right Side Div: Total and Pay / Proceed */}
+                      <div className="pricing-action-right">
+                        <div className="pricing-total-box">
+                          <span className="pricing-total-label">Total Amount:</span>
+                          <strong className="pricing-total-value">
+                            ₹{numNights > 0 ? (numNights * pricePerNight).toLocaleString() : '0'}
+                          </strong>
+                        </div>
+                        <div className="pricing-pay-box">
+                          <button
+                            type="button"
+                            className="btn-primary step-btn-next btn-theme-rose pay-action-btn"
+                            disabled={selectedDates.length === 0}
+                            onClick={() => goToStep(2, 'next')}
+                          >
+                            <span>Pay / Proceed</span>
+                            <ArrowRightIcon size={16} />
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
