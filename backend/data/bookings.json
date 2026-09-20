@@ -1,6 +1,29 @@
 {
   "bookings": [
     {
+      "id": "GB-436494",
+      "outfitId": "gfit-02",
+      "outfitName": "Sunkissed Marigold Rabari",
+      "customerName": "vruti Moradiya",
+      "firstName": "vruti",
+      "lastName": "Moradiya",
+      "email": "vrutimoradiya999@gmail.com",
+      "phone": "6354793852",
+      "mobile": "6354793852",
+      "deliveryLocation": "loni",
+      "location": "loni",
+      "selectedDates": [
+        "2026-09-20"
+      ],
+      "rentalNights": 1,
+      "size": "M",
+      "paymentMethod": "trial",
+      "totalRent": 2840,
+      "refundableDeposit": 2500,
+      "status": "Confirmed",
+      "createdAt": "2026-09-20T11:07:16.494Z"
+    },
+    {
       "id": "GB-825452",
       "outfitId": "gfit-02",
       "outfitName": "Sunkissed Marigold Rabari Ensemble",
