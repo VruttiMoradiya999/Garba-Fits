@@ -1718,6 +1718,56 @@
   white-space: nowrap;
 }
 
+/* ── OTP Verification Lock Banner & Locked Fields ── */
+.otp-lock-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #FFF8E7;
+  border: 1.5px dashed #E5B25D;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 0.82rem;
+  color: #7A5310;
+  font-weight: 600;
+  line-height: 1.4;
+  animation: fadeIn 0.3s ease;
+}
+
+.otp-lock-banner .lock-icon {
+  font-size: 1.05rem;
+  flex-shrink: 0;
+}
+
+.form-field-group.field-locked {
+  opacity: 0.55;
+  transition: opacity 0.3s ease;
+}
+
+.form-field-group.field-locked label {
+  color: #8C92A4;
+}
+
+.form-field-group.field-locked .locked-tag {
+  font-size: 0.74rem;
+  font-weight: 500;
+  color: #B0B5C0;
+  margin-left: 4px;
+}
+
+.form-field-group input:disabled {
+  background: #F8F9FA !important;
+  border: 1.5px dashed #D6DAE2 !important;
+  color: #9AA0AE !important;
+  cursor: not-allowed !important;
+}
+
+.btn-disabled-locked {
+  opacity: 0.55 !important;
+  cursor: not-allowed !important;
+  filter: grayscale(0.2);
+}
+
 /* ── OTP Verification Box ── */
 .otp-verification-box {
   background: #FFF8F9;

@@ -616,25 +616,40 @@ export default function RentalModal({ outfit, onClose, onNavigateTab }) {
                     )}
                   </div>
 
-                  {/* Email */}
-                  <div className="form-field-group">
-                    <label>Email Address *</label>
+                  {/* Lock Indicator Banner when OTP is not verified */}
+                  {!otpVerified && (
+                    <div className="otp-lock-banner">
+                      <span className="lock-icon">🔒</span>
+                      <span>Please verify your mobile number with OTP above to unlock the email & delivery fields.</span>
+                    </div>
+                  )}
+
+                  {/* Email (Unlocked only after OTP is verified) */}
+                  <div className={`form-field-group ${!otpVerified ? 'field-locked' : ''}`}>
+                    <label>
+                      Email Address * {!otpVerified && <span className="locked-tag">(Locked)</span>}
+                    </label>
                     <input
                       type="email"
-                      required
-                      placeholder="Enter your email address"
+                      required={otpVerified}
+                      disabled={!otpVerified}
+                      placeholder={otpVerified ? "Enter your email address" : "Unlock by verifying mobile number"}
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     />
                   </div>
 
-                  {/* Location / Campus Address */}
-                  <div className="form-field-group">
-                    <label>Delivery / Fitting Location *</label>
+                  {/* Location / Campus Address (Unlocked only after OTP is verified) */}
+                  <div className={`form-field-group ${!otpVerified ? 'field-locked' : ''}`}>
+                    <label>
+                      Delivery / Fitting Location * {!otpVerified && <span className="locked-tag">(Locked)</span>}
+                    </label>
                     <div className="input-location-wrap">
                       <input
                         type="text"
-                        required
+                        required={otpVerified}
+                        disabled={!otpVerified}
+                        placeholder={otpVerified ? "Enter hostel / room / campus address" : "Unlock by verifying mobile number"}
                         value={formData.location}
                         onChange={(e) => setFormData({ ...formData, location: e.target.value })}
                       />
@@ -654,12 +669,19 @@ export default function RentalModal({ outfit, onClose, onNavigateTab }) {
 
                     <button
                       type="submit"
-                      className="btn-primary step-btn-submit"
+                      disabled={!otpVerified}
+                      className={`btn-primary step-btn-submit ${!otpVerified ? 'btn-disabled-locked' : ''}`}
                     >
-                      {paymentMethod === 'cod' && <span>Confirm COD Booking (₹{(numNights * pricePerNight).toLocaleString()})</span>}
-                      {paymentMethod === 'prepaid' && <span>Pay with Razorpay (₹{(numNights * pricePerNight).toLocaleString()})</span>}
-                      {paymentMethod === 'trial' && <span>Reserve Free Trial Slot</span>}
-                      <ArrowRightIcon size={16} />
+                      {!otpVerified ? (
+                        <span>🔒 Verify Mobile to Continue</span>
+                      ) : (
+                        <>
+                          {paymentMethod === 'cod' && <span>Confirm COD Booking (₹{(numNights * pricePerNight).toLocaleString()})</span>}
+                          {paymentMethod === 'prepaid' && <span>Pay with Razorpay (₹{(numNights * pricePerNight).toLocaleString()})</span>}
+                          {paymentMethod === 'trial' && <span>Reserve Free Trial Slot</span>}
+                          <ArrowRightIcon size={16} />
+                        </>
+                      )}
                     </button>
                   </div>
                 </form>
