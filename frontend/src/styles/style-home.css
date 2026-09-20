@@ -1507,25 +1507,19 @@
 .card-breakdown-row {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
 }
 
 .card-row-label {
-  color: #6E7485;
-  font-weight: 600;
-  font-size: 0.84rem;
+  color: var(--color-charcoal);
+  font-weight: 700;
+  font-size: 0.86rem;
 }
 
 .card-row-val {
-  color: var(--color-charcoal);
-  font-weight: 700;
-  font-size: 0.92rem;
-}
-
-.card-row-sub {
-  font-size: 0.72rem;
-  font-weight: 500;
-  color: #8C92A4;
+  color: var(--color-rose);
+  font-weight: 800;
+  font-size: 1.22rem;
 }
 
 /* Right Stack containing 2nd & 3rd Divs */

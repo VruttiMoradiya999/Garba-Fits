@@ -465,14 +465,12 @@ export default function RentalModal({ outfit, onClose, onNavigateTab }) {
                           <span className="card-row-label">Rent:</span>
                           <strong className="card-row-val">
                             ₹{numNights > 0 ? (numNights * pricePerNight).toLocaleString() : pricePerNight.toLocaleString()}
-                            <span className="card-row-sub">{numNights > 0 ? ` (${numNights} ${numNights === 1 ? 'Night' : 'Nights'})` : ' / Night'}</span>
                           </strong>
                         </div>
                         <div className="card-breakdown-row">
                           <span className="card-row-label">Deposit:</span>
                           <strong className="card-row-val">
                             ₹{deposit.toLocaleString()}
-                            <span className="card-row-sub"> (Refundable)</span>
                           </strong>
                         </div>
                       </div>
