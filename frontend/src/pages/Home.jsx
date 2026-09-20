@@ -167,6 +167,22 @@ export default function Home({
   const [modalImgIndex, setModalImgIndex] = useState(0);
   const modalSliderTrackRef = useRef(null);
 
+  const handleOpenRentModal = (item) => {
+    setSelectedOutfit(item);
+    if (item) {
+      fetch('/api/logs/rent-click', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          outfitId: item.id,
+          outfitName: item.name,
+          price: item.price || item.rentPrice,
+          deposit: item.deposit
+        })
+      }).catch(() => {});
+    }
+  };
+
   // Fetch live outfits from backend with instant fallback
   useEffect(() => {
     const fetchCatalog = async () => {
@@ -532,7 +548,7 @@ export default function Home({
               key={outfit.id}
               outfit={outfit}
               ref={(el) => (cardRefs.current[index] = el)}
-              onRent={(item) => setSelectedOutfit(item)}
+              onRent={(item) => handleOpenRentModal(item)}
               onView={(item) => {
                 setModalImgIndex(0);
                 setViewModalOutfit(item);
@@ -770,7 +786,7 @@ export default function Home({
                 onClick={() => {
                   const target = viewModalOutfit;
                   setViewModalOutfit(null);
-                  setSelectedOutfit(target);
+                  handleOpenRentModal(target);
                 }}
               >
                 <span>Rent It</span>

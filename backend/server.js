@@ -15,27 +15,12 @@ const PORT = process.env.PORT || 5001;
 app.use(cors());
 app.use(express.json());
 
-// Global Request Logger Middleware
-app.use((req, res, next) => {
-  const start = Date.now();
-  const timestamp = new Date().toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata' });
-
-  res.on('finish', () => {
-    const duration = Date.now() - start;
-    const statusColor = res.statusCode >= 400 ? '❌' : '✅';
-    console.log(`[${timestamp} IST] ${statusColor} ${req.method} ${req.originalUrl} | Status: ${res.statusCode} (${duration}ms)`);
-  });
-
-  next();
-});
-
 // Dynamic catalog loaded from backend/data/products.json
 const getCatalog = () => db.getProducts();
 
 const bookings = [];
 const inquiries = [];
 const subscribers = [];
-
 
 // GET MSG91 OTP Widget Configuration
 app.get('/api/otp/config', (req, res) => {
@@ -230,6 +215,24 @@ app.get(['/api/outfits/:id', '/api/products/:id'], (req, res) => {
   res.json({ success: true, data: outfit });
 });
 
+// POST log when user clicks "Rent" on any item
+app.post(['/api/logs/rent-click', '/api/logs/click-rent', '/api/analytics/rent-click'], (req, res) => {
+  const { outfitId, outfitName, price, deposit } = req.body || {};
+  const timestamp = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+
+  console.log(`\n======================================================`);
+  console.log(`🛒 [RENT CLICKED] User opened rental for:`);
+  console.log(`👗 Name:    ${outfitName || 'Unknown Product'}`);
+  console.log(`🆔 ID:      ${outfitId || 'N/A'}`);
+  if (price !== undefined)   console.log(`💰 Rent:    ₹${price}`);
+  if (deposit !== undefined) console.log(`🛡️ Deposit: ₹${deposit}`);
+  console.log(`⏰ Time:    ${timestamp}`);
+  console.log(`======================================================\n`);
+
+  res.json({ success: true, logged: true });
+});
+
+
 // POST rental booking
 app.post('/api/rentals', async (req, res) => {
   const {
@@ -285,16 +288,6 @@ app.post('/api/rentals', async (req, res) => {
     createdAt: new Date().toISOString()
   };
 
-  console.log(`\n======================================================`);
-  console.log(`🎉 [NEW RENTAL BOOKING RECEIVED]`);
-  console.log(`   Order ID   : ${booking.id}`);
-  console.log(`   Customer   : ${booking.customerName} (${booking.phone})`);
-  console.log(`   Outfit     : ${booking.outfitName} [${booking.outfitId}]`);
-  console.log(`   Delivery   : ${booking.deliveryLocation}`);
-  console.log(`   Rent       : ₹${booking.totalRent} | Deposit: ₹${booking.refundableDeposit} | Total: ₹${booking.totalRent + booking.refundableDeposit}`);
-  console.log(`   Payment    : ${booking.paymentMethod.toUpperCase()}`);
-  console.log(`======================================================\n`);
-
   // Save to MongoDB Atlas (and local backup)
   await db.saveBooking(booking);
 
@@ -312,7 +305,6 @@ app.post('/api/rentals', async (req, res) => {
 // GET all bookings (retrieved from MongoDB Atlas database)
 app.get('/api/rentals', async (req, res) => {
   const bookings = await db.getBookings();
-  console.log(`📋 [GET /api/rentals] Retrieved ${bookings.length} bookings from MongoDB.`);
   res.json({
     success: true,
     count: bookings.length,
@@ -338,12 +330,6 @@ app.post('/api/contact', (req, res) => {
     createdAt: new Date().toISOString()
   };
 
-  console.log(`\n💬 [NEW CONTACT / TRIAL INQUIRY]`);
-  console.log(`   From   : ${inquiry.name} (${inquiry.phone})`);
-  console.log(`   City   : ${inquiry.city} | Date: ${inquiry.preferredDate}`);
-  console.log(`   Message: "${inquiry.message}"`);
-  console.log(`======================================================\n`);
-
   db.saveInquiry(inquiry);
 
   res.status(201).json({
@@ -360,7 +346,6 @@ app.post('/api/subscribe', (req, res) => {
     return res.status(400).json({ success: false, message: 'Please provide a valid email address.' });
   }
 
-  console.log(`📬 [NEW NEWSLETTER SUBSCRIBER] ${email}`);
   db.saveSubscriber(email);
 
   res.status(201).json({
