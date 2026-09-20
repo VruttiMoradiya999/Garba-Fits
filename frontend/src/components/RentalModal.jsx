@@ -95,8 +95,10 @@ export default function RentalModal({ outfit, onClose, onNavigateTab }) {
 
   // Price calculations
   const pricePerNight = outfit?.price ?? outfit?.pricePerNight ?? 700;
+  const deposit = outfit?.deposit ?? 2000;
   const numNights = selectedDates.length;
-  const totalAmount = numNights > 0 ? numNights * pricePerNight : pricePerNight;
+  const rentTotal = numNights > 0 ? numNights * pricePerNight : 0;
+  const totalAmount = numNights > 0 ? (rentTotal + deposit) : (pricePerNight + deposit);
 
   const [isSendingOtp, setIsSendingOtp] = useState(false);
   const [isVerifyingOtp, setIsVerifyingOtp] = useState(false);
@@ -456,45 +458,45 @@ export default function RentalModal({ outfit, onClose, onNavigateTab }) {
                       </div>
                     </div>
 
-                    {/* Bottom Pricing Breakdown & Checkout Action */}
-                    <div className="calendar-pricing-action-grid">
-                      {/* Left Side Div: 1st Rent & 2nd Deposit from products.json */}
-                      <div className="pricing-breakdown-left">
-                        <div className="pricing-item">
-                          <span className="pricing-label">Rent:</span>
-                          <strong className="pricing-value">
-                            ₹{numNights > 0 ? (numNights * pricePerNight).toLocaleString() : pricePerNight.toLocaleString()}
-                            <span className="pricing-sub">{numNights > 0 ? ` (${numNights} ${numNights === 1 ? 'Night' : 'Nights'})` : ' / Night'}</span>
+                    {/* 3 Separate Divs: 1st Rent & Deposit, 2nd Total Amount, 3rd Pay Button */}
+                    <div className="modal-pricing-stack">
+                      {/* 1st Div: Rent and Deposit */}
+                      <div className="modal-price-breakdown-card">
+                        <div className="breakdown-row">
+                          <span className="breakdown-label">Rent:</span>
+                          <strong className="breakdown-value">
+                            ₹{numNights > 0 ? rentTotal.toLocaleString() : pricePerNight.toLocaleString()}
+                            <span className="breakdown-sub">{numNights > 0 ? ` (${numNights} ${numNights === 1 ? 'Night' : 'Nights'})` : ' / Night'}</span>
                           </strong>
                         </div>
-                        <div className="pricing-item">
-                          <span className="pricing-label">Deposit:</span>
-                          <strong className="pricing-value">
-                            ₹{(outfit?.deposit || 2000).toLocaleString()}
-                            <span className="pricing-sub"> (Refundable)</span>
+                        <div className="breakdown-row">
+                          <span className="breakdown-label">Deposit:</span>
+                          <strong className="breakdown-value">
+                            ₹{deposit.toLocaleString()}
+                            <span className="breakdown-sub"> (Refundable)</span>
                           </strong>
                         </div>
                       </div>
 
-                      {/* Right Side Div: Total and Pay / Proceed */}
-                      <div className="pricing-action-right">
-                        <div className="pricing-total-box">
-                          <span className="pricing-total-label">Total Amount:</span>
-                          <strong className="pricing-total-value">
-                            ₹{numNights > 0 ? (numNights * pricePerNight).toLocaleString() : '0'}
-                          </strong>
-                        </div>
-                        <div className="pricing-pay-box">
-                          <button
-                            type="button"
-                            className="btn-primary step-btn-next btn-theme-rose pay-action-btn"
-                            disabled={selectedDates.length === 0}
-                            onClick={() => goToStep(2, 'next')}
-                          >
-                            <span>Pay / Proceed</span>
-                            <ArrowRightIcon size={16} />
-                          </button>
-                        </div>
+                      {/* 2nd Div: Total Amount (Addition of Rent + Deposit) */}
+                      <div className="modal-total-amount-card">
+                        <span className="total-card-label">Total Amount (Rent + Deposit):</span>
+                        <strong className="total-card-value">
+                          ₹{numNights > 0 ? (rentTotal + deposit).toLocaleString() : '0'}
+                        </strong>
+                      </div>
+
+                      {/* 3rd Div: Pay / Proceed Action */}
+                      <div className="modal-pay-action-card">
+                        <button
+                          type="button"
+                          className="btn-primary step-btn-next btn-theme-rose pay-action-btn"
+                          disabled={selectedDates.length === 0}
+                          onClick={() => goToStep(2, 'next')}
+                        >
+                          <span>Pay / Proceed</span>
+                          <ArrowRightIcon size={16} />
+                        </button>
                       </div>
                     </div>
                   </div>
