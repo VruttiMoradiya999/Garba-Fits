@@ -1483,85 +1483,103 @@
   bottom: 4px;
 }
 
-/* ── Step 1: 3 Distinct Divs Stack below Calendar ── */
-.modal-pricing-stack {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+/* ── Step 1 Bottom Layout: 3 Separate Divs ── */
+.step1-checkout-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 12px;
   margin-top: 6px;
+  align-items: stretch;
 }
 
-/* 1st Div: Rent and Deposit Breakdown */
-.modal-price-breakdown-card {
+/* 1st DIV: Left Side Standalone Card with Rent & Deposit */
+.checkout-card-left-breakdown {
   background: #FFF8F9;
   border: 1.5px solid rgba(227, 174, 186, 0.55);
   border-radius: 14px;
-  padding: 10px 16px;
+  padding: 10px 14px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 6px;
 }
 
-.breakdown-row {
+.card-breakdown-row {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  font-size: 0.88rem;
+  align-items: baseline;
 }
 
-.breakdown-label {
+.card-row-label {
   color: #6E7485;
   font-weight: 600;
   font-size: 0.84rem;
 }
 
-.breakdown-value {
+.card-row-val {
   color: var(--color-charcoal);
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
 }
 
-.breakdown-sub {
-  font-size: 0.74rem;
+.card-row-sub {
+  font-size: 0.72rem;
   font-weight: 500;
   color: #8C92A4;
-  margin-left: 2px;
 }
 
-/* 2nd Div: Total Amount (Addition of Rent + Deposit) */
-.modal-total-amount-card {
-  background: #FFF0F3;
-  border: 1.5px solid rgba(195, 107, 126, 0.4);
-  border-radius: 14px;
-  padding: 10px 16px;
+/* Right Stack containing 2nd & 3rd Divs */
+.checkout-right-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: space-between;
+}
+
+/* 2nd DIV: Standalone Total Amount Card (Rent + Deposit) */
+.checkout-card-total-box {
+  background: #FFF8F9;
+  border: 1.5px solid rgba(227, 174, 186, 0.55);
+  border-radius: 12px;
+  padding: 8px 14px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.total-card-label {
-  font-size: 0.88rem;
+.checkout-total-label {
+  font-size: 0.84rem;
   font-weight: 700;
   color: var(--color-charcoal);
 }
 
-.total-card-value {
+.checkout-total-val {
   color: var(--color-rose);
-  font-size: 1.28rem;
+  font-size: 1.22rem;
   font-weight: 800;
 }
 
-/* 3rd Div: Pay / Proceed Action */
-.modal-pay-action-card .pay-action-btn {
+/* 3rd DIV: Standalone Pay / Proceed Button Box */
+.checkout-card-pay-box {
+  display: flex;
+}
+
+.checkout-card-pay-box .pay-proceed-btn {
   width: 100%;
-  padding: 12px 18px;
-  font-size: 0.95rem;
-  border-radius: 14px;
+  padding: 10px 14px;
+  font-size: 0.88rem;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  font-weight: 700;
+  gap: 6px;
+}
+
+@media (max-width: 600px) {
+  .step1-checkout-layout {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
 }
 
 @media (max-width: 680px) {
