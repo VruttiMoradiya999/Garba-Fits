@@ -42,10 +42,12 @@ export default function RentalModal({ outfit, onClose, onNavigateTab }) {
   });
 
   const [confirmedBooking, setConfirmedBooking] = useState(null);
+  const [razorpayPaymentId, setRazorpayPaymentId] = useState('');
 
   // Helper to persist rental booking to backend API
-  const submitRentalBooking = async (methodOverride) => {
+  const submitRentalBooking = async (methodOverride, rzpPaymentId) => {
     try {
+      const pId = rzpPaymentId || razorpayPaymentId || '';
       const payload = {
         outfitId: outfit.id,
         firstName: formData.firstName,
@@ -59,7 +61,8 @@ export default function RentalModal({ outfit, onClose, onNavigateTab }) {
         days: selectedDates.length,
         paymentMethod: methodOverride || paymentMethod,
         totalRent: totalAmount,
-        refundableDeposit: outfit.deposit || 2000
+        refundableDeposit: outfit.deposit || 2000,
+        razorpayPaymentId: pId
       };
       const res = await fetch('/api/rentals', {
         method: 'POST',
@@ -81,12 +84,6 @@ export default function RentalModal({ outfit, onClose, onNavigateTab }) {
   const [otpSent, setOtpSent] = useState(false);
   const [otpVerified, setOtpVerified] = useState(false);
   const [otpError, setOtpError] = useState('');
-
-  // Razorpay Gateway simulation state
-  const [isRazorpayOpen, setIsRazorpayOpen] = useState(false);
-  const [razorpayProcessing, setRazorpayProcessing] = useState(false);
-  const [razorpayMethod, setRazorpayMethod] = useState('upi');
-  const [razorpaySuccess, setRazorpaySuccess] = useState(false);
 
   // Calendar view state (Current month & year)
   const today = new Date();
@@ -260,6 +257,61 @@ export default function RentalModal({ outfit, onClose, onNavigateTab }) {
     }
   };
 
+  // Razorpay Checkout Payment Trigger
+  const makeRazorpayPayment = () => {
+    if (typeof window.Razorpay === 'undefined') {
+      alert('Razorpay Checkout SDK is still loading. Please check your internet connection and try again.');
+      return;
+    }
+
+    const customerName = `${formData.firstName} ${formData.lastName}`.trim() || 'Valued Customer';
+
+    const options = {
+      key: "rzp_test_TeEdUXStEqOzx9", // Razorpay Test Key ID
+      amount: Math.round(totalAmount * 100), // Amount in paise (₹700 = 70000 paise)
+      currency: "INR",
+      name: "GarbaFits",
+      description: `Rental: ${outfit.name} (${selectedDates.length || 1} Night${selectedDates.length > 1 ? 's' : ''})`,
+      image: "https://garba-fits.netlify.app/favicon.ico",
+      handler: function (response) {
+        console.log("Razorpay Payment Success:", response);
+        const paymentId = response.razorpay_payment_id;
+        setRazorpayPaymentId(paymentId);
+        submitRentalBooking('prepaid', paymentId);
+        goToStep(4, 'next');
+      },
+      prefill: {
+        name: customerName,
+        email: formData.email || "customer@example.com",
+        contact: formData.mobile || "9876543210"
+      },
+      notes: {
+        outfitId: outfit.id,
+        outfitName: outfit.name,
+        selectedDates: selectedDates.join(', ')
+      },
+      theme: {
+        color: "#e11d48" // GarbaFits brand aesthetic
+      },
+      modal: {
+        ondismiss: function () {
+          console.log('Razorpay payment modal closed by customer.');
+        }
+      }
+    };
+
+    try {
+      const razorpayInstance = new window.Razorpay(options);
+      razorpayInstance.on('payment.failed', function (response) {
+        alert("Payment Failed: " + (response.error?.description || "Transaction was declined."));
+      });
+      razorpayInstance.open();
+    } catch (err) {
+      console.error("Razorpay initialization error:", err);
+      alert("Could not open Razorpay checkout: " + err.message);
+    }
+  };
+
   // Step 3 submission handler (Only proceeds when mobile is verified)
   const handleDetailsSubmit = (e) => {
     e.preventDefault();
@@ -276,25 +328,11 @@ export default function RentalModal({ outfit, onClose, onNavigateTab }) {
     }
 
     if (paymentMethod === 'prepaid') {
-      setIsRazorpayOpen(true);
+      makeRazorpayPayment();
     } else {
       submitRentalBooking(paymentMethod);
       goToStep(4, 'next');
     }
-  };
-
-  // Razorpay Pay Trigger
-  const handleRazorpayPay = () => {
-    setRazorpayProcessing(true);
-    setTimeout(() => {
-      setRazorpayProcessing(false);
-      setRazorpaySuccess(true);
-      submitRentalBooking('prepaid');
-      setTimeout(() => {
-        setIsRazorpayOpen(false);
-        goToStep(4, 'next');
-      }, 700);
-    }, 1200);
   };
 
   if (!outfit) return null;
@@ -701,8 +739,8 @@ export default function RentalModal({ outfit, onClose, onNavigateTab }) {
 
                     <div className="confirmation-summary-box">
                       <div className="summary-line">
-                        <span>Transaction ID:</span>
-                        <strong style={{ color: 'var(--color-rose)' }}>RZP-GF-{Math.floor(100000 + Math.random() * 900000)}</strong>
+                        <span>Razorpay Payment ID:</span>
+                        <strong style={{ color: 'var(--color-rose)' }}>{razorpayPaymentId || confirmedBooking?.razorpayPaymentId || 'rzp_test_paid'}</strong>
                       </div>
                       <div className="summary-line">
                         <span>Outfit:</span>
@@ -774,90 +812,6 @@ export default function RentalModal({ outfit, onClose, onNavigateTab }) {
 
           </div>
         </div>
-
-        {/* ══════════════════════════════════════════════
-            RAZORPAY CHECKOUT MODAL OVERLAY (FOR PREPAID)
-           ══════════════════════════════════════════════ */}
-        {isRazorpayOpen && (
-          <div className="razorpay-modal-overlay">
-            <div className="razorpay-gateway-box modal-lexend">
-              <div className="razorpay-header">
-                <div className="razorpay-brand">
-                  <div className="razorpay-logo-icon">⚡</div>
-                  <div>
-                    <div className="razorpay-merchant-name">GarbaFits Rentals</div>
-                    <div className="razorpay-order-id">Order #GF-{Date.now().toString().slice(-5)}</div>
-                  </div>
-                </div>
-                <div className="razorpay-amount">
-                  ₹{(numNights * pricePerNight).toLocaleString()}
-                </div>
-              </div>
-
-              {razorpayProcessing ? (
-                <div className="razorpay-loading-view">
-                  <div className="razorpay-spinner" />
-                  <div className="razorpay-loading-text">Processing Secure Payment via Razorpay...</div>
-                  <div className="razorpay-sub-text">Please do not close this window</div>
-                </div>
-              ) : razorpaySuccess ? (
-                <div className="razorpay-success-view">
-                  <div className="razorpay-success-icon">✓</div>
-                  <div className="razorpay-success-title">Payment Approved!</div>
-                </div>
-              ) : (
-                <div className="razorpay-body">
-                  <div className="razorpay-payment-methods">
-                    <div
-                      className={`rzp-method-item ${razorpayMethod === 'upi' ? 'active' : ''}`}
-                      onClick={() => setRazorpayMethod('upi')}
-                    >
-                      <span>📱 UPI (GPay / PhonePe / Paytm / BHIM)</span>
-                    </div>
-                    <div
-                      className={`rzp-method-item ${razorpayMethod === 'cards' ? 'active' : ''}`}
-                      onClick={() => setRazorpayMethod('cards')}
-                    >
-                      <span>💳 Credit / Debit Card / ATM</span>
-                    </div>
-                    <div
-                      className={`rzp-method-item ${razorpayMethod === 'netbanking' ? 'active' : ''}`}
-                      onClick={() => setRazorpayMethod('netbanking')}
-                    >
-                      <span>🏛️ Netbanking / All Indian Banks</span>
-                    </div>
-                  </div>
-
-                  <div className="rzp-prefill-info">
-                    <span>Paying as: <strong>{formData.firstName} {formData.lastName}</strong> ({formData.email})</span>
-                  </div>
-
-                  <div className="razorpay-actions">
-                    <button
-                      type="button"
-                      className="rzp-cancel-btn"
-                      onClick={() => setIsRazorpayOpen(false)}
-                    >
-                      Cancel
-                    </button>
-                    <button
-                      type="button"
-                      className="rzp-pay-btn"
-                      onClick={handleRazorpayPay}
-                    >
-                      Pay ₹{(numNights * pricePerNight).toLocaleString()}
-                    </button>
-                  </div>
-
-                  <div className="razorpay-footer-badge">
-                    🔒 Secured by Razorpay 256-bit Encryption
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        )}
-
       </div>
     </div>
   );
