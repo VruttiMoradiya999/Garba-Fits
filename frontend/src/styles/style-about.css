@@ -1,0 +1,354 @@
+/* ==========================================================================
+   GarbaFits - About Page Stylesheet (style-about.css)
+   ========================================================================== */
+
+.about-page-container {
+  padding: 30px 24px 70px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Hero Box Container */
+.about-hero-box {
+  background: #FFFFFF;
+  border-radius: 32px;
+  border: 1.5px solid rgba(227, 174, 186, 0.45);
+  box-shadow: 0 16px 45px rgba(45, 49, 66, 0.08);
+  padding: clamp(28px, 4vw, 52px);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+
+/* Vector Layout Grid */
+.about-vector-layout {
+  display: grid;
+  grid-template-columns: 0.85fr 1.35fr;
+  gap: clamp(20px, 3.5vw, 44px);
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+@media (max-width: 900px) {
+  .about-vector-layout {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}
+
+.about-vector-left {
+  display: flex;
+  padding-left: 1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  z-index: 2;
+  max-width: 500px;
+}
+
+.about-big-heading {
+  font-family: var(--font-sans);
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
+  font-weight: 900;
+  color: #273760;
+  letter-spacing: -0.5px;
+  line-height: 1.08;
+  margin: 0 0 10px 0;
+  text-transform: uppercase;
+}
+
+.about-heading-bar {
+  width: 110px;
+  height: 5px;
+  background: #3E5EAB;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.about-vector-desc {
+  font-size: 1.02rem;
+  line-height: 1.65;
+  color: #4A5568;
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+.about-vector-subtext {
+  color: #6E7485;
+  font-size: 0.98rem;
+  line-height: 1.68;
+  margin-bottom: 28px;
+}
+
+.about-vector-btn {
+  padding: 14px 36px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-btn-dark);
+  color: #FFFFFF !important;
+  box-shadow: 0 8px 24px rgba(43, 53, 65, 0.26);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: var(--transition-smooth);
+}
+
+.about-vector-btn:hover {
+  background-color: var(--color-btn-dark-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(43, 53, 65, 0.35);
+  color: #FFFFFF !important;
+}
+
+.about-vector-btn svg {
+  transition: transform 0.25s ease;
+}
+
+.about-vector-btn:hover svg {
+  transform: scale(1.08);
+}
+
+/* Right Side: Organic Blob & Staggered Owners */
+.about-vector-right {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 10px;
+}
+
+.about-blob-backdrop {
+  position: absolute;
+  top: -12%;
+  right: -6%;
+  width: 112%;
+  height: 124%;
+  background: linear-gradient(135deg, #FFAAA6 0%, #FF8A8A 60%, #F57285 100%);
+  border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+  z-index: 1;
+  opacity: 0.88;
+  filter: drop-shadow(0 15px 30px rgba(245, 114, 133, 0.25));
+  pointer-events: none;
+  animation: blobFloat 10s ease-in-out infinite alternate;
+}
+
+@keyframes blobFloat {
+  0% {
+    border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+    transform: scale(0.98) rotate(0deg);
+  }
+
+  100% {
+    border-radius: 60% 40% 45% 55% / 50% 60% 40% 50%;
+    transform: scale(1.02) rotate(3deg);
+  }
+}
+
+.about-owners-duo {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  width: 100%;
+  align-items: center;
+}
+
+@media (max-width: 580px) {
+  .about-owners-duo {
+    gap: 16px;
+  }
+}
+
+.owner-profile-card {
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 26px;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 14px 36px rgba(45, 49, 66, 0.14);
+  padding: 20px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Stagger one image up and another down side-by-side */
+.owner-profile-card.stagger-up {
+  transform: translateY(-28px);
+}
+
+.owner-profile-card.stagger-up:hover {
+  transform: translateY(-34px);
+  box-shadow: 0 20px 45px rgba(45, 49, 66, 0.2);
+  border-color: rgba(195, 107, 126, 0.65);
+}
+
+.owner-profile-card.stagger-down {
+  transform: translateY(28px);
+}
+
+.owner-profile-card.stagger-down:hover {
+  transform: translateY(22px);
+  box-shadow: 0 20px 45px rgba(45, 49, 66, 0.2);
+  border-color: rgba(195, 107, 126, 0.65);
+}
+
+.owner-avatar-frame {
+  width: 215px;
+  height: 235px;
+  max-width: 100%;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 4px solid #FFFFFF;
+  box-shadow: 0 12px 28px rgba(45, 49, 66, 0.16);
+  margin-bottom: 14px;
+  background: #FFF0F3;
+  position: relative;
+}
+
+.owner-avatar-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.owner-profile-card:hover .owner-avatar-frame img {
+  transform: scale(1.06);
+}
+
+.owner-floating-name {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(39, 55, 96, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #FFFFFF;
+  padding: 6px 18px;
+  border-radius: var(--radius-pill);
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Owner Social Buttons Row */
+.owner-social-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding-top: 4px;
+}
+
+.owner-social-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  color: #555;
+  background: #F4F6F9;
+}
+
+.owner-social-btn.linkedin {
+  background: rgba(10, 102, 194, 0.1);
+  color: #0A66C2;
+}
+
+.owner-social-btn.linkedin:hover {
+  background: #0A66C2;
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(10, 102, 194, 0.35);
+}
+
+.owner-social-btn.github {
+  background: rgba(36, 41, 47, 0.1);
+  color: #24292F;
+}
+
+.owner-social-btn.github:hover {
+  background: #24292F;
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(36, 41, 47, 0.35);
+}
+
+.owner-social-btn.email {
+  background: rgba(195, 107, 126, 0.12);
+  color: var(--color-rose);
+}
+
+.owner-social-btn.email:hover {
+  background: var(--color-rose);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(195, 107, 126, 0.35);
+}
+
+/* Key Highlights Section */
+.about-features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.about-perk-card {
+  background: #FFFFFF;
+  padding: 28px 24px;
+  border-radius: 22px;
+  border: 1.5px solid rgba(227, 174, 186, 0.4);
+  box-shadow: 0 8px 24px rgba(45, 49, 66, 0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.about-perk-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(45, 49, 66, 0.1);
+}
+
+.about-perk-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #FFF0F3;
+  color: var(--color-rose);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.about-perk-title {
+  font-size: 1.25rem;
+  margin-bottom: 8px;
+  color: var(--color-charcoal);
+  font-family: var(--font-sans);
+  font-weight: 700;
+}
+
+.about-perk-desc {
+  color: #6E7485;
+  font-size: 0.92rem;
+  line-height: 1.6;
+}

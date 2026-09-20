@@ -1,0 +1,149 @@
+/* ==========================================================================
+   GarbaFits - Floating Navbar Styles (style-navbar.css)
+   Floating layout with equal margins, round pill edges, max-width,
+   and a light dashed border.
+   ========================================================================== */
+
+.floating-navbar-wrapper {
+  width: 100%;
+
+  margin: 20px auto;
+  padding: 0 20px;
+  position: sticky;
+  top: 16px;
+  z-index: 1000;
+}
+
+.site-header.floating-navbar {
+  background-color: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: var(--radius-pill);
+  border: 1.5px dashed rgba(195, 107, 126, 0.35);
+  box-shadow: 0 8px 30px rgba(45, 49, 66, 0.06);
+  padding: 0 32px;
+  transition: var(--transition-smooth);
+}
+
+.site-header.floating-navbar:hover {
+  border-color: rgba(195, 107, 126, 0.6);
+  box-shadow: 0 10px 35px rgba(195, 107, 126, 0.12);
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+}
+
+/* Script Logo: clean handwritten style matching reference 'Friped' */
+.navbar-brand {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.brand-script-text {
+  font-family: var(--font-script);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--color-charcoal);
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+
+/* Navigation Links */
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 38px;
+  list-style: none;
+}
+
+.nav-link {
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-charcoal);
+  padding: 6px 0;
+  position: relative;
+  transition: var(--transition-smooth);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: var(--color-rose);
+  transition: width 0.25s ease;
+  border-radius: 2px;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--color-rose);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* Mobile Toggle */
+.mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  color: var(--color-charcoal);
+}
+
+/* Responsive for Floating Navbar */
+@media (max-width: 868px) {
+  .floating-navbar-wrapper {
+    margin: 12px auto;
+    padding: 0 12px;
+  }
+
+  .site-header.floating-navbar {
+    padding: 0 20px;
+    border-radius: 24px;
+  }
+
+  .mobile-toggle {
+    display: block;
+  }
+
+  .navbar-links {
+    position: absolute;
+    top: 76px;
+    left: 12px;
+    right: 12px;
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    border: 1.5px dashed rgba(195, 107, 126, 0.35);
+    flex-direction: column;
+    padding: 24px;
+    gap: 18px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+    transform: translateY(-20px);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+  }
+
+  .navbar-links.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+}

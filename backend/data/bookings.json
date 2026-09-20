@@ -1,0 +1,190 @@
+{
+  "bookings": [
+    {
+      "id": "GB-825452",
+      "outfitId": "gfit-02",
+      "outfitName": "Sunkissed Marigold Rabari Ensemble",
+      "customerName": "vruti Moradiya",
+      "firstName": "vruti",
+      "lastName": "Moradiya",
+      "email": "vrutimoradiya999@gmail.com",
+      "phone": "6354793852",
+      "mobile": "6354793852",
+      "deliveryLocation": "mlkk",
+      "location": "mlkk",
+      "selectedDates": [
+        "2026-09-20"
+      ],
+      "rentalNights": 1,
+      "size": "M",
+      "paymentMethod": "trial",
+      "totalRent": 700,
+      "refundableDeposit": 2500,
+      "status": "Confirmed",
+      "createdAt": "2026-09-19T15:30:25.453Z"
+    },
+    {
+      "id": "GB-378375",
+      "outfitId": "gfit-02",
+      "outfitName": "Sunkissed Marigold Rabari Ensemble",
+      "customerName": "vruti Moradiya",
+      "firstName": "vruti",
+      "lastName": "Moradiya",
+      "email": "vrutimoradiya999@gmail.com",
+      "phone": "6354793852",
+      "mobile": "6354793852",
+      "deliveryLocation": "loni",
+      "location": "loni",
+      "selectedDates": [
+        "2026-09-22"
+      ],
+      "rentalNights": 1,
+      "size": "M",
+      "paymentMethod": "trial",
+      "totalRent": 700,
+      "refundableDeposit": 2500,
+      "status": "Confirmed",
+      "createdAt": "2026-09-19T15:22:58.375Z"
+    },
+    {
+      "id": "GB-156511",
+      "outfitId": "gfit-01",
+      "outfitName": "Royal Mirrorwork Peacock Chaniya Choli",
+      "customerName": "Vruti Moradiya",
+      "firstName": "Vruti",
+      "lastName": "Moradiya",
+      "email": "vrutimoradiya999@gmail.com",
+      "phone": "6354793852",
+      "mobile": "6354793852",
+      "deliveryLocation": "MIT ADT Campus, Pune",
+      "location": "MIT ADT Campus, Pune",
+      "selectedDates": [
+        "2026-10-18"
+      ],
+      "rentalNights": 1,
+      "size": "M",
+      "paymentMethod": "trial",
+      "totalRent": 700,
+      "refundableDeposit": 2000,
+      "status": "Confirmed",
+      "createdAt": "2026-09-19T15:19:16.511Z"
+    },
+    {
+      "id": "GB-704488",
+      "outfitId": "gfit-02",
+      "outfitName": "Sunkissed Marigold Rabari Ensemble",
+      "customerName": "vruti Moradiya",
+      "email": "vrutimoradiya999@gmail.com",
+      "phone": "6354793852",
+      "deliveryLocation": "moti",
+      "selectedDates": [
+        "2026-09-21"
+      ],
+      "rentalNights": 1,
+      "size": "M",
+      "paymentMethod": "trial",
+      "totalRent": 700,
+      "refundableDeposit": 2500,
+      "status": "Confirmed",
+      "createdAt": "2026-09-19T14:38:24.488Z"
+    },
+    {
+      "id": "GB-038685",
+      "outfitId": "gfit-02",
+      "outfitName": "Sunkissed Marigold Rabari Ensemble",
+      "customerName": "reget ghhrg",
+      "email": "1krishnagorde04@gmail.com",
+      "phone": "9404527706",
+      "deliveryLocation": "ghorpadi",
+      "selectedDates": [
+        "2026-09-21"
+      ],
+      "rentalNights": 1,
+      "size": "M",
+      "paymentMethod": "trial",
+      "totalRent": 700,
+      "refundableDeposit": 2500,
+      "status": "Confirmed",
+      "createdAt": "2026-09-19T09:43:58.685Z"
+    },
+    {
+      "id": "GB-971124",
+      "outfitId": "gfit-06",
+      "outfitName": "Sunset Amber Abhala Festive Chaniya",
+      "customerName": "Krishna  Gorde",
+      "email": "krishnagorde04@gmail.com",
+      "phone": "9404527706",
+      "deliveryLocation": "yahi pe ",
+      "selectedDates": [
+        "2026-09-24"
+      ],
+      "rentalNights": 1,
+      "size": "M",
+      "paymentMethod": "trial",
+      "totalRent": 700,
+      "refundableDeposit": 2400,
+      "status": "Confirmed",
+      "createdAt": "2026-09-19T09:09:31.124Z"
+    },
+    {
+      "id": "GB-308145",
+      "outfitId": "gfit-01",
+      "outfitName": "Royal Mirrorwork Peacock Chaniya Choli",
+      "customerName": "hv gc",
+      "email": "vh@gmail.com",
+      "phone": "987654321",
+      "deliveryLocation": "knom",
+      "selectedDates": [
+        "2026-09-19"
+      ],
+      "rentalNights": 1,
+      "size": "M",
+      "paymentMethod": "trial",
+      "totalRent": 700,
+      "refundableDeposit": 2000,
+      "status": "Confirmed",
+      "createdAt": "2026-09-19T08:58:28.145Z"
+    },
+    {
+      "id": "GB-937033",
+      "outfitId": "gfit-01",
+      "outfitName": "Royal Mirrorwork Peacock Chaniya Choli",
+      "customerName": "Krishnaa Gordeee",
+      "email": "vrutimoradiya6002@gmail.com",
+      "phone": "8780765469",
+      "deliveryLocation": "loni",
+      "selectedDates": [
+        "2026-09-22"
+      ],
+      "rentalNights": 1,
+      "size": "M",
+      "paymentMethod": "trial",
+      "totalRent": 700,
+      "refundableDeposit": 2000,
+      "status": "Confirmed",
+      "createdAt": "2026-09-19T08:52:17.033Z"
+    },
+    {
+      "id": "GB-054264",
+      "outfitId": "gfit-02",
+      "outfitName": "Sunkissed Marigold Rabari Ensemble",
+      "customerName": "Vruti Moradiya",
+      "email": "vrutimoradiya999@gmail.com",
+      "phone": "6354793852",
+      "deliveryLocation": "MIT ADT Hostel B-Block, Pune",
+      "selectedDates": [
+        "2026-10-14",
+        "2026-10-15"
+      ],
+      "rentalNights": 2,
+      "size": "M",
+      "paymentMethod": "trial",
+      "totalRent": 1400,
+      "refundableDeposit": 2500,
+      "status": "Confirmed",
+      "createdAt": "2026-09-19T08:37:34.264Z"
+    }
+  ],
+  "inquiries": [],
+  "subscribers": []
+}
