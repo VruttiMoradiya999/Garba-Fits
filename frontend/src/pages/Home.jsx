@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { BrowseRentIcon, EyeIcon, ArrowRightIcon, StarIcon, CloseIcon, SparkleIcon, ShieldCheckIcon, ChevronLeftIcon, ChevronRightIcon, LinkedInIcon, GitHubIcon, MailIcon, PhoneIcon } from '../components/Icons';
 import RentalModal from '../components/RentalModal';
-import OUTFITS from '../data/products.json';
+import OUTFITS from '../../../backend/data/products.json';
 import '../styles/style-home.css';
 import '../styles/style-about.css';
 import '../styles/style-contact.css';
@@ -85,7 +85,7 @@ const OutfitCardItem = React.forwardRef(({ outfit, onRent, onView }, ref) => {
 
         {/* Translucent Price tag on top left of image */}
         <span className="card-price-tag">
-          ₹ {outfit.pricePerNight || 700} / Night
+          ₹ {outfit.price ?? outfit.pricePerNight ?? 700} / Night
         </span>
 
         {/* Carousel Prev/Next Arrows */}

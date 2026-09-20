@@ -94,7 +94,7 @@ export default function RentalModal({ outfit, onClose, onNavigateTab }) {
   const modalBoxRef = useRef(null);
 
   // Price calculations
-  const pricePerNight = outfit?.pricePerNight || 700;
+  const pricePerNight = outfit?.price ?? outfit?.pricePerNight ?? 700;
   const numNights = selectedDates.length;
   const totalAmount = numNights > 0 ? numNights * pricePerNight : pricePerNight;
 
