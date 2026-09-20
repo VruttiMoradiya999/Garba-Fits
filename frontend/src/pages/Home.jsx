@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { BrowseRentIcon, EyeIcon, ArrowRightIcon, StarIcon, CloseIcon, SparkleIcon, ShieldCheckIcon, ChevronLeftIcon, ChevronRightIcon, LinkedInIcon, GitHubIcon, MailIcon, PhoneIcon } from '../components/Icons';
 import RentalModal from '../components/RentalModal';
+import OUTFITS from '../data/products.json';
 import '../styles/style-home.css';
 import '../styles/style-about.css';
 import '../styles/style-contact.css';
@@ -15,373 +16,19 @@ const CAPTIONS = [
   "MIT gives you deadlines. We give you the best Chaniyas",
 ];
 
-/* ── 20 outfit cards data ── */
-const OUTFITS = [
-  {
-    id: 'gfit-01',
-    name: 'Royal Mirrorwork Peacock Chaniya Choli',
-    colorTheme: 'Royal Blue & Emerald',
-    fabric: 'Pure Heavy Gamthi Cotton with Real Mirror Work',
-    pricePerNight: 700,
-    rentPrice: 1499,
-    deposit: 2000,
-    retailValue: 14500,
-    sizes: ['S', 'M', 'L', 'XL'],
-    rating: 4.9,
-    reviewsCount: 42,
-    images: ['/assets/outfits/p1a.png', '/assets/outfits/p1b.png'],
-    image: '/assets/outfits/p1a.png',
-    navratriDay: 1,
-    flair: '9M Full Twirl',
-    desc: 'Authentic Gujarati craftsmanship featuring intricate Gamthi embroidery and real mirror accents that sparkle under garba night lights.'
-  },
-  {
-    id: 'gfit-02',
-    name: 'Sunkissed Marigold Rabari Ensemble',
-    colorTheme: 'Mustard Yellow & Crimson',
-    fabric: 'Organic Khadi Cotton with Cowrie Shell Tassels',
-    pricePerNight: 700,
-    rentPrice: 1699,
-    deposit: 2500,
-    retailValue: 16800,
-    sizes: ['XS', 'S', 'M', 'L'],
-    rating: 5.0,
-    reviewsCount: 38,
-    images: ['/assets/outfits/p2a.png', '/assets/outfits/p2b.png'],
-    image: '/assets/outfits/p2a.png',
-    navratriDay: 2,
-    flair: '10M Ultra Flared',
-    desc: 'Traditional Rabari tribal design adorned with hand-stitched motifs and cowrie shell hangings designed for effortless 360-degree spins.'
-  },
-  {
-    id: 'gfit-03',
-    name: 'Regal Magenta Rani Bandhani Set',
-    colorTheme: 'Rani Pink & Gold',
-    fabric: 'Georgette with Heavy Gota Patti & Zari Borders',
-    pricePerNight: 700,
-    rentPrice: 1399,
-    deposit: 2000,
-    retailValue: 13000,
-    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    rating: 4.8,
-    reviewsCount: 29,
-    images: ['/assets/outfits/p3a.png', '/assets/outfits/p3b.png'],
-    image: '/assets/outfits/p3a.png',
-    navratriDay: 3,
-    flair: '8.5M Lightweight',
-    desc: 'Vibrant Bandhani tie-dye artistry paired with golden Gota Patti lace work, offering lightweight comfort for energetic garba rounds.'
-  },
-  {
-    id: 'gfit-04',
-    name: 'Heritage Ivory Kutchi Patchwork',
-    colorTheme: 'Off-White & Multi-Hue',
-    fabric: 'Pure Slub Cotton with Authentic Kutch Patches',
-    pricePerNight: 700,
-    rentPrice: 1799,
-    deposit: 2500,
-    retailValue: 18500,
-    sizes: ['S', 'M', 'L'],
-    rating: 4.9,
-    reviewsCount: 51,
-    images: ['/assets/outfits/p4a.png', '/assets/outfits/p4b.png'],
-    image: '/assets/outfits/p4a.png',
-    navratriDay: 4,
-    flair: '9.5M Heavy Gher',
-    desc: 'Heritage Kutchi artisanal masterpiece weaving together hand-woven patches, thread tassels, and mirror work for a standout festive look.'
-  },
-  {
-    id: 'gfit-05',
-    name: 'Navratri Emerald Gamthi Gher Chaniya',
-    colorTheme: 'Emerald Green & Ruby',
-    fabric: 'Pure Handloom Cotton with Hand-embroidery',
-    pricePerNight: 700,
-    rentPrice: 1599,
-    deposit: 2200,
-    retailValue: 15200,
-    sizes: ['S', 'M', 'L'],
-    rating: 4.9,
-    reviewsCount: 34,
-    images: ['/assets/outfits/p5a.png', '/assets/outfits/p5b.png'],
-    image: '/assets/outfits/p5a.png',
-    navratriDay: 5,
-    flair: '9M Flare',
-    desc: 'Rich emerald green hand-embroidered ghagra paired with an ornate mirror blouse and contrasting dupatta.'
-  },
-  {
-    id: 'gfit-06',
-    name: 'Sunset Amber Abhala Festive Chaniya',
-    colorTheme: 'Amber Orange & Rust',
-    fabric: 'Chanderi Silk with Intricate Abhala Work',
-    pricePerNight: 700,
-    rentPrice: 1649,
-    deposit: 2400,
-    retailValue: 16000,
-    sizes: ['M', 'L', 'XL'],
-    rating: 5.0,
-    reviewsCount: 47,
-    images: ['/assets/outfits/p6a.png', '/assets/outfits/p6b.png'],
-    image: '/assets/outfits/p6a.png',
-    navratriDay: 6,
-    flair: '10M Flow',
-    desc: 'Warm sunset amber palette highlighted with luminous abhala mirror discs and handcrafted tassels.'
-  },
-  {
-    id: 'gfit-07',
-    name: 'Midnight Starlight Mirror Lehenga',
-    colorTheme: 'Navy Blue & Silver',
-    fabric: 'Raw Silk with Heavy Foil and Mirror Motifs',
-    pricePerNight: 700,
-    rentPrice: 1549,
-    deposit: 2200,
-    retailValue: 14800,
-    sizes: ['XS', 'S', 'M', 'L'],
-    rating: 4.8,
-    reviewsCount: 31,
-    images: ['/assets/outfits/p7a.png', '/assets/outfits/p7b.png'],
-    image: '/assets/outfits/p7a.png',
-    navratriDay: 7,
-    flair: '9M Ultra Twirl',
-    desc: 'Deep navy midnight ensemble glittering with cosmic mirror reflections, crafted for graceful garba steps.'
-  },
-  {
-    id: 'gfit-08',
-    name: 'Scarlet Crimson Golden Zari Twirl',
-    colorTheme: 'Deep Scarlet & Gold',
-    fabric: 'Mulmul Cotton with Traditional Zari & Shells',
-    pricePerNight: 700,
-    rentPrice: 1749,
-    deposit: 2500,
-    retailValue: 17500,
-    sizes: ['S', 'M', 'L', 'XL'],
-    rating: 4.9,
-    reviewsCount: 56,
-    images: ['/assets/outfits/p8a.png', '/assets/outfits/p8b.png'],
-    image: '/assets/outfits/p8a.png',
-    navratriDay: 8,
-    flair: '10M Heavy Gher',
-    desc: 'Festive red traditional silhouette rich with auspicious golden borders, cowrie hangings, and celebratory flair.'
-  },
-  {
-    id: 'gfit-09',
-    name: 'Aasmani Celestial Mirrorwork Ghagra',
-    colorTheme: 'Sky Blue & Silver',
-    fabric: 'Fine Georgette with Silver Resham & Star Mirror Work',
-    pricePerNight: 700,
-    rentPrice: 1599,
-    deposit: 2200,
-    retailValue: 15800,
-    sizes: ['S', 'M', 'L', 'XL'],
-    rating: 4.9,
-    reviewsCount: 37,
-    images: ['/assets/outfits/p9a.png', '/assets/outfits/p9b.png'],
-    image: '/assets/outfits/p9a.png',
-    navratriDay: 9,
-    flair: '10M Ultra Twirl',
-    desc: 'Ethereal pastel blue silhouette embellished with intricate constellation mirror work and silver sequin borders.'
-  },
-  {
-    id: 'gfit-10',
-    name: 'Gulabi Kesariya Bandhej Ghagra Choli',
-    colorTheme: 'Saffron Orange & Fuchsia',
-    fabric: 'Pure Chanderi Silk with Golden Zari & Kundan Patches',
-    pricePerNight: 700,
-    rentPrice: 1699,
-    deposit: 2400,
-    retailValue: 16500,
-    sizes: ['XS', 'S', 'M', 'L'],
-    rating: 5.0,
-    reviewsCount: 44,
-    images: ['/assets/outfits/p10a.png', '/assets/outfits/p10b.png'],
-    image: '/assets/outfits/p10a.png',
-    navratriDay: 1,
-    flair: '9.5M Heavy Gher',
-    desc: 'Festive fusion of saffron warmth and fuchsia vibrancy with handcrafted kundan embroidery and traditional tie-dye.'
-  },
-  {
-    id: 'gfit-11',
-    name: 'Noorani Black Abhala Doli Lehenga',
-    colorTheme: 'Midnight Black & Multicolored Thread',
-    fabric: 'Heavy Cotton Slub with Gujarati Abhala & Pom-pom Border',
-    pricePerNight: 700,
-    rentPrice: 1799,
-    deposit: 2500,
-    retailValue: 18000,
-    sizes: ['S', 'M', 'L', 'XL'],
-    rating: 4.9,
-    reviewsCount: 52,
-    images: ['/assets/outfits/p11a.png', '/assets/outfits/p11b.png'],
-    image: '/assets/outfits/p11a.png',
-    navratriDay: 2,
-    flair: '10M Full Twirl',
-    desc: 'Iconic jet black Gujarati lehenga covered in kaleidoscope embroidery, authentic glass abhala mirrors, and playful pom-poms.'
-  },
-  {
-    id: 'gfit-12',
-    name: 'Surajmukhi Golden Yellow Gamthi Set',
-    colorTheme: 'Sunflower Yellow & Teal',
-    fabric: 'Organic Slub Cotton with Kutchi Hand Embroidery',
-    pricePerNight: 700,
-    rentPrice: 1449,
-    deposit: 2000,
-    retailValue: 14000,
-    sizes: ['S', 'M', 'L'],
-    rating: 4.8,
-    reviewsCount: 33,
-    images: ['/assets/outfits/p12a.png', '/assets/outfits/p12b.png'],
-    image: '/assets/outfits/p12a.png',
-    navratriDay: 3,
-    flair: '8.5M Lightweight',
-    desc: 'Bright sunny palette paired with contrast teal dori work and real mirror accents, crafted for breezy fast-paced garba steps.'
-  },
-  {
-    id: 'gfit-13',
-    name: 'Teal Mayura Gamthi Gher Chaniya',
-    colorTheme: 'Deep Teal & Mustard',
-    fabric: 'Pure Handloom Cotton with Resham Peacock Motifs',
-    pricePerNight: 700,
-    rentPrice: 1649,
-    deposit: 2300,
-    retailValue: 16200,
-    sizes: ['XS', 'S', 'M', 'L', 'XL'],
-    rating: 4.9,
-    reviewsCount: 40,
-    images: ['/assets/outfits/p13a.png'],
-    image: '/assets/outfits/p13a.png',
-    navratriDay: 4,
-    flair: '9M Ultra Flare',
-    desc: 'Striking jewel-toned peacock blue ensemble highlighted with golden gota ribbons, cowrie tassels, and mirror medallions.'
-  },
-  {
-    id: 'gfit-14',
-    name: 'Kasturi Lavender Pastel Mirror Choli',
-    colorTheme: 'Lavender & Champagne Gold',
-    fabric: 'Silk Georgette with Delicate Threadwork & Foil Accents',
-    pricePerNight: 700,
-    rentPrice: 1549,
-    deposit: 2200,
-    retailValue: 15000,
-    sizes: ['S', 'M', 'L'],
-    rating: 4.8,
-    reviewsCount: 27,
-    images: ['/assets/outfits/p14a.png'],
-    image: '/assets/outfits/p14a.png',
-    navratriDay: 5,
-    flair: '9M Fluid Spin',
-    desc: 'Modern pastel elegance meets classical festive tradition with shimmering champagne border laces and mirror floral sprays.'
-  },
-  {
-    id: 'gfit-15',
-    name: 'Angoori Mint Green Gota Patti Ghagra',
-    colorTheme: 'Mint Green & Coral Pink',
-    fabric: 'Raw Silk with Jaipuri Gota Patti & Zardozi Details',
-    pricePerNight: 700,
-    rentPrice: 1699,
-    deposit: 2500,
-    retailValue: 17200,
-    sizes: ['S', 'M', 'L', 'XL'],
-    rating: 4.9,
-    reviewsCount: 45,
-    images: ['/assets/outfits/p15a.png'],
-    image: '/assets/outfits/p15a.png',
-    navratriDay: 6,
-    flair: '10M Heavy Gher',
-    desc: 'Cool mint canvas beautifully contrasted with coral borders and glistening gold gota ribbons engineered for wide dramatic spins.'
-  },
-  {
-    id: 'gfit-16',
-    name: 'Sindhuri Maroon Ahir Embroidered Set',
-    colorTheme: 'Deep Maroon & Ochre',
-    fabric: 'Heavy Khadi with Traditional Ahir Stitch & Cowries',
-    pricePerNight: 700,
-    rentPrice: 1749,
-    deposit: 2500,
-    retailValue: 17800,
-    sizes: ['M', 'L', 'XL', 'XXL'],
-    rating: 5.0,
-    reviewsCount: 49,
-    images: ['/assets/outfits/p16a.png'],
-    image: '/assets/outfits/p16a.png',
-    navratriDay: 7,
-    flair: '10M Full Twirl',
-    desc: 'Traditional tribal Ahir needlecraft loaded with hand-sewn glass pieces, ochre yarn tassels, and heavy perimeter borders.'
-  },
-  {
-    id: 'gfit-17',
-    name: 'Champakali Yellow Silk Brocade Chaniya',
-    colorTheme: 'Golden Yellow & Royal Blue',
-    fabric: 'Banarasi Brocade with Gamthi Work Blouse',
-    pricePerNight: 700,
-    rentPrice: 1599,
-    deposit: 2200,
-    retailValue: 15600,
-    sizes: ['XS', 'S', 'M', 'L'],
-    rating: 4.9,
-    reviewsCount: 36,
-    images: ['/assets/outfits/p17a.png'],
-    image: '/assets/outfits/p17a.png',
-    navratriDay: 8,
-    flair: '9M Flowing Twirl',
-    desc: 'Luminous brocade weave reflecting festive radiance under garba arena lighting, paired with a vibrant royal blue koti blouse.'
-  },
-  {
-    id: 'gfit-18',
-    name: 'Koyal Charcoal & Neon Mirror Ensemble',
-    colorTheme: 'Charcoal Grey & Neon Orange',
-    fabric: 'Fine Slub Cotton with High-Contrast Neon Resham Work',
-    pricePerNight: 700,
-    rentPrice: 1649,
-    deposit: 2400,
-    retailValue: 16200,
-    sizes: ['S', 'M', 'L', 'XL'],
-    rating: 4.8,
-    reviewsCount: 32,
-    images: ['/assets/outfits/p18a.png'],
-    image: '/assets/outfits/p18a.png',
-    navratriDay: 9,
-    flair: '9.5M Heavy Flare',
-    desc: 'Contemporary youth garba style combining sleek charcoal with electric neon accents and concentrated abhala clusters.'
-  },
-  {
-    id: 'gfit-19',
-    name: 'Padmavati Crimson Rani Zari Lehenga',
-    colorTheme: 'Crimson Red & Antique Gold',
-    fabric: 'Velvet & Chanderi Silk with Heavy Antique Zari Borders',
-    pricePerNight: 700,
-    rentPrice: 1849,
-    deposit: 2600,
-    retailValue: 19500,
-    sizes: ['S', 'M', 'L', 'XL'],
-    rating: 5.0,
-    reviewsCount: 61,
-    images: ['/assets/outfits/p19a.png'],
-    image: '/assets/outfits/p19a.png',
-    navratriDay: 1,
-    flair: '10M Ultra Twirl',
-    desc: 'A royal bridal-grade Navratri masterpiece with dense antique zari weaving, mirror kalis, and luxurious double-tier borders.'
-  },
-  {
-    id: 'gfit-20',
-    name: 'Narmada Turquoise Bandhani Dream Set',
-    colorTheme: 'Turquoise & Lime Green',
-    fabric: 'Pure Georgette with Traditional Kutchi Bandhani & Mirrors',
-    pricePerNight: 700,
-    rentPrice: 1499,
-    deposit: 2100,
-    retailValue: 14800,
-    sizes: ['XS', 'S', 'M', 'L'],
-    rating: 4.9,
-    reviewsCount: 35,
-    images: ['/assets/outfits/p20a.png'],
-    image: '/assets/outfits/p20a.png',
-    navratriDay: 2,
-    flair: '8.5M Lightweight Spin',
-    desc: 'Effortlessly lightweight turquoise tie-dye drape with electric lime accents, crafted for non-stop dandiya rounds without fatigue.'
-  }
-];
+const getOutfitImages = (outfit) => {
+  if (!outfit) return ['/assets/outfits/p1a.png'];
+  if (outfit.images && outfit.images.length > 0) return outfit.images;
+  if (outfit.image) return [outfit.image];
+  const num = parseInt(outfit.id?.replace(/\D/g, '') || '1', 10);
+  return num <= 12
+    ? [`/assets/outfits/p${num}a.png`, `/assets/outfits/p${num}b.png`]
+    : [`/assets/outfits/p${num}a.png`];
+};
 
 /* ── Outfit Card Component: Image Carousel with GSAP Slide, Price tag + two buttons below ── */
 const OutfitCardItem = React.forwardRef(({ outfit, onRent, onView }, ref) => {
-  const images = outfit.images && outfit.images.length > 0 ? outfit.images : [outfit.image];
+  const images = getOutfitImages(outfit);
   const [currentIdx, setCurrentIdx] = useState(0);
   const trackRef = useRef(null);
 
@@ -1093,12 +740,12 @@ export default function Home({
 
             {/* Top: Both preview images side by side in separate divs */}
             <div className="preview-modal-images-top">
-              {(viewModalOutfit.images && viewModalOutfit.images.length > 0 ? viewModalOutfit.images : [viewModalOutfit.image]).map((imgSrc, idx) => (
+              {getOutfitImages(viewModalOutfit).map((imgSrc, idx) => (
                 <div key={idx} className="preview-modal-single-img-card">
                   <img
                     src={imgSrc}
                     alt={`${viewModalOutfit.name} view ${idx + 1}`}
-                    onError={(e) => { e.currentTarget.src = viewModalOutfit.image || '/assets/outfits/p1a.png'; }}
+                    onError={(e) => { e.currentTarget.src = '/assets/outfits/p1a.png'; }}
                   />
                 </div>
               ))}

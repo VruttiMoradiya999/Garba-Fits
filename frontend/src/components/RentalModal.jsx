@@ -13,6 +13,16 @@ import {
   ArrowRightIcon
 } from './Icons';
 
+const getOutfitImages = (outfit) => {
+  if (!outfit) return ['/assets/outfits/p1a.png'];
+  if (outfit.images && outfit.images.length > 0) return outfit.images;
+  if (outfit.image) return [outfit.image];
+  const num = parseInt(outfit.id?.replace(/\D/g, '') || '1', 10);
+  return num <= 12
+    ? [`/assets/outfits/p${num}a.png`, `/assets/outfits/p${num}b.png`]
+    : [`/assets/outfits/p${num}a.png`];
+};
+
 export default function RentalModal({ outfit, onClose, onNavigateTab }) {
   // Step state: 1 = Date, 2 = Payment Method, 3 = User Details, 4 = Confirmation Screen
   const [step, setStep] = useState(1);
@@ -334,12 +344,12 @@ export default function RentalModal({ outfit, onClose, onNavigateTab }) {
                   {/* Left Column: Both Preview Images Stacked Vertically */}
                   <div className="step-date-product-left">
                     <div className="product-previews-stack">
-                      {(outfit.images && outfit.images.length > 0 ? outfit.images : [outfit.image]).map((imgSrc, idx) => (
+                      {getOutfitImages(outfit).map((imgSrc, idx) => (
                         <div key={idx} className="product-preview-card">
                           <img
                             src={imgSrc}
                             alt={`${outfit.name} view ${idx + 1}`}
-                            onError={(e) => { e.currentTarget.src = outfit.image || '/assets/outfits/p1a.png'; }}
+                            onError={(e) => { e.currentTarget.src = '/assets/outfits/p1a.png'; }}
                           />
                         </div>
                       ))}

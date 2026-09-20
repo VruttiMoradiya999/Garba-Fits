@@ -9,6 +9,7 @@ import { Subscriber } from '../models/Subscriber.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const DATA_FILE = path.join(__dirname, 'bookings.json');
+const PRODUCTS_FILE = path.join(__dirname, 'products.json');
 
 // Initialize local JSON backup file
 function initDb() {
@@ -137,5 +138,17 @@ export const db = {
       writeLocalData(data);
     }
     return email;
+  },
+
+  getProducts: () => {
+    try {
+      if (fs.existsSync(PRODUCTS_FILE)) {
+        const content = fs.readFileSync(PRODUCTS_FILE, 'utf-8');
+        return JSON.parse(content);
+      }
+    } catch (err) {
+      console.error('[Database Error] Failed reading products.json:', err.message);
+    }
+    return [];
   }
 };
