@@ -128,7 +128,7 @@ export async function sendAdminNotification(booking) {
             <td style="padding: 8px 0; font-weight: 600;">${booking.email || 'N/A'}</td>
           </tr>
           <tr>
-            <td style="padding: 8px 0; color: #718096;">Delivery/Fitting Address:</td>
+            <td style="padding: 8px 0; color: #718096;">Delivery Location:</td>
             <td style="padding: 8px 0; font-weight: 600;">${booking.deliveryLocation || 'N/A'}</td>
           </tr>
         </table>

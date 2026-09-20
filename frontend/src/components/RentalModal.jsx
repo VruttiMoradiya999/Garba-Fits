@@ -655,13 +655,13 @@ export default function RentalModal({ outfit, onClose, onNavigateTab }) {
 
                   {/* Location / Campus Address (Unlocked only after OTP is verified) */}
                   <div className={`form-field-group ${!otpVerified ? 'field-locked' : ''}`}>
-                    <label>Delivery / Fitting Location *</label>
+                    <label>Delivery Location *</label>
                     <div className="input-location-wrap">
                       <input
                         type="text"
                         required={otpVerified}
                         disabled={!otpVerified}
-                        placeholder="Enter delivery / fitting location"
+                        placeholder="Enter delivery location"
                         value={formData.location}
                         onChange={(e) => setFormData({ ...formData, location: e.target.value })}
                       />
@@ -819,7 +819,7 @@ export default function RentalModal({ outfit, onClose, onNavigateTab }) {
                         <strong>{outfit.name}</strong>
                       </div>
                       <div className="summary-line">
-                        <span>Fitting Location:</span>
+                        <span>Delivery Location:</span>
                         <strong>{formData.location}</strong>
                       </div>
                       <div className="summary-line">
