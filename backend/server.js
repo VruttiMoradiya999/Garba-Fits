@@ -239,6 +239,7 @@ app.post('/api/rentals', async (req, res) => {
   const outfit = getCatalog().find(o => o.id === outfitId);
   const clientName = customerName || `${firstName || ''} ${lastName || ''}`.trim() || 'Valued Customer';
   const clientPhone = phone || mobile;
+  const rentalNights = (selectedDates && selectedDates.length) || days || 1;
   const rentalPricePerNight = outfit ? (outfit.price || outfit.pricePerNight || 700) : 700;
   const rent = totalRent || (rentalPricePerNight * rentalNights);
   const deposit = refundableDeposit || (outfit ? outfit.deposit : 2000);
