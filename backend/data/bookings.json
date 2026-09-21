@@ -1,6 +1,29 @@
 {
   "bookings": [
     {
+      "id": "GB-403344",
+      "outfitId": "gfit-03",
+      "outfitName": "Magenta Rani Bandhani",
+      "customerName": "vruti Moradiya",
+      "firstName": "vruti",
+      "lastName": "Moradiya",
+      "email": "vrutimoradiya999@gmail.com",
+      "phone": "6354793852",
+      "mobile": "6354793852",
+      "deliveryLocation": "loni",
+      "location": "loni",
+      "selectedDates": [
+        "2026-09-29"
+      ],
+      "rentalNights": 1,
+      "size": "M",
+      "paymentMethod": "trial",
+      "totalRent": 2790,
+      "refundableDeposit": 2000,
+      "status": "Confirmed",
+      "createdAt": "2026-09-21T07:06:43.345Z"
+    },
+    {
       "id": "GB-436494",
       "outfitId": "gfit-02",
       "outfitName": "Sunkissed Marigold Rabari",

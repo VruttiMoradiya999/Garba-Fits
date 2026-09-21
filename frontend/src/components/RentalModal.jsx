@@ -60,8 +60,9 @@ export default function RentalModal({ outfit, onClose, onNavigateTab }) {
         selectedDates,
         days: selectedDates.length,
         paymentMethod: methodOverride || paymentMethod,
-        totalRent: totalAmount,
-        refundableDeposit: outfit.deposit || 2000,
+        totalRent: currentRent,
+        refundableDeposit: currentDeposit,
+        totalAmount: totalAmount,
         razorpayPaymentId: pId
       };
       const res = await fetch('/api/rentals', {
@@ -97,7 +98,9 @@ export default function RentalModal({ outfit, onClose, onNavigateTab }) {
   const pricePerNight = outfit?.price ?? outfit?.pricePerNight ?? 700;
   const deposit = outfit?.deposit ?? 2000;
   const numNights = selectedDates.length;
-  const totalAmount = numNights > 0 ? (numNights * pricePerNight + deposit) : (pricePerNight + deposit);
+  const currentRent = numNights > 0 ? (numNights * pricePerNight) : 0;
+  const currentDeposit = numNights > 0 ? deposit : 0;
+  const totalAmount = numNights > 0 ? (currentRent + currentDeposit) : 0;
 
   const [isSendingOtp, setIsSendingOtp] = useState(false);
   const [isVerifyingOtp, setIsVerifyingOtp] = useState(false);
@@ -268,7 +271,7 @@ export default function RentalModal({ outfit, onClose, onNavigateTab }) {
     const customerName = `${formData.firstName} ${formData.lastName}`.trim() || 'Valued Customer';
 
     const options = {
-      key: "rzp_test_TeEdUXStEqOzx9", // Razorpay Test Key ID
+      key: "rzp_live_Teaene8Mm2ZkZV", // Razorpay Live Key ID
       amount: Math.round(totalAmount * 100), // Amount in paise (₹700 = 70000 paise)
       currency: "INR",
       name: "GarbaFits",
@@ -464,13 +467,13 @@ export default function RentalModal({ outfit, onClose, onNavigateTab }) {
                         <div className="card-breakdown-row">
                           <span className="card-row-label">Rent:</span>
                           <strong className="card-row-val">
-                            ₹{numNights > 0 ? (numNights * pricePerNight).toLocaleString() : pricePerNight.toLocaleString()}
+                            ₹{currentRent.toLocaleString()}
                           </strong>
                         </div>
                         <div className="card-breakdown-row">
                           <span className="card-row-label">Deposit:</span>
                           <strong className="card-row-val">
-                            ₹{deposit.toLocaleString()}
+                            ₹{currentDeposit.toLocaleString()}
                           </strong>
                         </div>
                       </div>
@@ -481,7 +484,7 @@ export default function RentalModal({ outfit, onClose, onNavigateTab }) {
                         <div className="checkout-card-total-box">
                           <span className="checkout-total-label">Total Amount:</span>
                           <strong className="checkout-total-val">
-                            ₹{numNights > 0 ? (numNights * pricePerNight + deposit).toLocaleString() : '0'}
+                            ₹{totalAmount.toLocaleString()}
                           </strong>
                         </div>
 
@@ -688,8 +691,8 @@ export default function RentalModal({ outfit, onClose, onNavigateTab }) {
                         <span>🔒 Verify Mobile to Continue</span>
                       ) : (
                         <>
-                          {paymentMethod === 'cod' && <span>Confirm COD Booking (₹{(numNights * pricePerNight).toLocaleString()})</span>}
-                          {paymentMethod === 'prepaid' && <span>Pay with Razorpay (₹{(numNights * pricePerNight).toLocaleString()})</span>}
+                          {paymentMethod === 'cod' && <span>Confirm COD Booking (₹{totalAmount.toLocaleString()})</span>}
+                          {paymentMethod === 'prepaid' && <span>Pay with Razorpay (₹{totalAmount.toLocaleString()})</span>}
                           {paymentMethod === 'trial' && <span>Reserve Free Trial Slot</span>}
                           <ArrowRightIcon size={16} />
                         </>
@@ -729,7 +732,7 @@ export default function RentalModal({ outfit, onClose, onNavigateTab }) {
                       </div>
                       <div className="summary-line">
                         <span>Payment Mode:</span>
-                        <strong>Cash on Delivery (₹{(numNights * pricePerNight).toLocaleString()})</strong>
+                        <strong>Cash on Delivery (₹{totalAmount.toLocaleString()})</strong>
                       </div>
                       <div className="summary-line">
                         <span>Contact Mobile:</span>
@@ -774,7 +777,7 @@ export default function RentalModal({ outfit, onClose, onNavigateTab }) {
                     <div className="confirmation-summary-box">
                       <div className="summary-line">
                         <span>Razorpay Payment ID:</span>
-                        <strong style={{ color: 'var(--color-rose)' }}>{razorpayPaymentId || confirmedBooking?.razorpayPaymentId || 'rzp_test_paid'}</strong>
+                        <strong style={{ color: 'var(--color-rose)' }}>{razorpayPaymentId || confirmedBooking?.razorpayPaymentId || 'rzp_paid'}</strong>
                       </div>
                       <div className="summary-line">
                         <span>Outfit:</span>
@@ -786,7 +789,7 @@ export default function RentalModal({ outfit, onClose, onNavigateTab }) {
                       </div>
                       <div className="summary-line">
                         <span>Amount Paid:</span>
-                        <strong>₹{(numNights * pricePerNight).toLocaleString()}</strong>
+                        <strong>₹{totalAmount.toLocaleString()}</strong>
                       </div>
                       <div className="summary-line">
                         <span>Receipt Sent To:</span>
