@@ -6,12 +6,12 @@
 
 .floating-navbar-wrapper {
   width: 100%;
-
-  margin: 20px auto;
-  padding: 0 20px;
-  position: sticky;
-  top: 16px;
+  max-width: 1380px;
+  margin: 16px auto 8px auto;
+  padding: 0 clamp(16px, 3vw, 40px);
+  position: relative;
   z-index: 1000;
+  flex-shrink: 0;
 }
 
 .site-header.floating-navbar {
@@ -110,13 +110,21 @@
 /* Responsive for Floating Navbar */
 @media (max-width: 868px) {
   .floating-navbar-wrapper {
-    margin: 12px auto;
+    margin: 8px auto 6px auto;
     padding: 0 12px;
   }
 
   .site-header.floating-navbar {
-    padding: 0 20px;
-    border-radius: 24px;
+    padding: 0 16px;
+    border-radius: 20px;
+  }
+
+  .navbar {
+    height: 52px;
+  }
+
+  .brand-script-text {
+    font-size: 1.85rem;
   }
 
   .mobile-toggle {
@@ -125,17 +133,17 @@
 
   .navbar-links {
     position: absolute;
-    top: 76px;
+    top: 64px;
     left: 12px;
     right: 12px;
     background-color: #FFFFFF;
     border-radius: 20px;
     border: 1.5px dashed rgba(195, 107, 126, 0.35);
     flex-direction: column;
-    padding: 24px;
-    gap: 18px;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
-    transform: translateY(-20px);
+    padding: 20px;
+    gap: 16px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    transform: translateY(-16px);
     opacity: 0;
     pointer-events: none;
     transition: all 0.3s ease;

@@ -9,31 +9,36 @@
    ========================================================================== */
 
 .home-page {
+  flex: 1 1 0%;
+  min-height: 0;
   height: 100%;
-  max-height: 100%;
+  width: 100%;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   position: relative;
 }
 
 .hero-section {
-  position: relative;
+  flex: 1 1 0%;
+  min-height: 0;
   height: 100%;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
   display: flex;
   align-items: center;
-  overflow: hidden;
   padding: 0;
-  width: 100%;
 }
 
 .hero-container {
   max-width: 1380px;
   width: 100%;
-  padding-left: clamp(20px, 4vw, 50px);
-  padding-right: clamp(20px, 4vw, 50px);
+  padding-left: clamp(16px, 3vw, 40px);
+  padding-right: clamp(16px, 3vw, 40px);
   height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .hero-grid {
@@ -253,10 +258,7 @@
    ========================================================================== */
 .cards-equidistant-container {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
   z-index: 5;
@@ -266,15 +268,16 @@
   align-content: start;
   align-items: start;
   gap: 20px;
-  row-gap: 32px;
+  row-gap: 28px;
   column-gap: 20px;
   padding-left: clamp(16px, 2.5vw, 36px);
   padding-right: clamp(16px, 2.5vw, 36px);
-  padding-top: 24px;
-  padding-bottom: 50px;
+  padding-top: 18px;
+  padding-bottom: 40px;
   box-sizing: border-box;
   overflow-y: auto;
   overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
   scrollbar-color: rgba(195, 107, 126, 0.35) transparent;
   visibility: hidden;
@@ -812,69 +815,148 @@
 /* ==========================================================================
    Responsive adjustments
    ========================================================================== */
+/* ==========================================================================
+   Responsive adjustments
+   ========================================================================== */
+@media (max-width: 1200px) {
+  .cards-equidistant-container {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    row-gap: 24px;
+    padding: 16px 20px 40px;
+  }
+}
+
 @media (max-width: 992px) {
-
-  html,
-  body {
-    height: auto;
-    overflow-y: auto;
-  }
-
-  .app-container,
-  .home-page {
-    height: auto;
-    max-height: none;
-    overflow-y: visible;
-  }
-
   .hero-grid {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    gap: 30px;
-    padding: 20px 0;
+    gap: clamp(10px, 2.2vh, 22px);
+    padding: 8px 0;
+    height: 100%;
+    max-height: 100%;
+    width: 100%;
+    overflow: hidden;
   }
 
-  .hero-grid.in-cards-view {
-    grid-template-columns: 1fr;
+  .hero-content {
+    display: contents;
+  }
+
+  .hero-intro-wrapper {
+    display: contents;
+  }
+
+  .hero-headline {
+    order: 1;
+    font-size: clamp(2rem, 6.8vw, 2.9rem);
+    margin-bottom: 4px;
+    line-height: 1.12;
   }
 
   .hero-subtitle {
+    order: 2;
+    font-size: clamp(0.88rem, 2.5vw, 1.05rem);
+    line-height: 1.4;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 0;
+    min-height: auto;
+    max-width: 380px;
   }
 
-  .hero-actions {
+  .hero-visual {
+    order: 3;
+    position: relative;
+    width: 100%;
+    flex: 0 1 auto;
+    height: clamp(220px, 36vh, 320px);
+    display: flex;
     justify-content: center;
+    align-items: flex-end;
+    margin: 4px 0 0 0;
+    padding: 0;
+    overflow: visible;
   }
 
-  .hero-image-wrapper {
-    margin-right: 0;
-    margin-bottom: 20px;
+  .hero-visual-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
   }
 
   .hero-circle-backdrop {
     position: absolute;
-    width: 320px;
-    height: 360px;
-    right: 50%;
-    transform: translateX(50%);
-    border-radius: 180px 180px 0 0;
+    bottom: 0;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    width: min(290px, 78vw);
+    height: 100%;
+    max-height: 310px;
+    border-radius: 145px 145px 0 0;
+    z-index: 1;
+  }
+
+  .hero-image-wrapper {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: min(270px, 74vw);
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
   }
 
   .hero-image-wrapper img {
-    max-height: 48vh;
+    display: block;
+    width: 100%;
+    max-width: 270px;
+    height: 100%;
+    max-height: 300px;
+    object-fit: contain;
+    object-position: bottom center;
+    margin-bottom: 0;
+  }
+
+  .hero-actions {
+    order: 4;
+    justify-content: center;
+    margin-top: 0;
+    margin-bottom: 4px;
+    z-index: 10;
+  }
+
+  .hero-actions .btn-primary {
+    padding: 13px 36px;
+    font-size: 1.02rem;
+    box-shadow: 0 8px 24px rgba(43, 53, 65, 0.28);
   }
 
   .cards-equidistant-container {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    padding-left: 16px;
-    padding-right: 16px;
-    gap: 16px;
+    padding: 14px 16px 36px;
+    gap: 14px;
+    row-gap: 20px;
   }
 
   .about-slide-container,
   .contact-slide-container {
     grid-template-columns: 1fr;
+    padding: 14px 14px 36px;
+    gap: 20px;
+    align-items: start;
   }
 
   .view-modal-grid {
@@ -889,20 +971,20 @@
 @media (max-width: 580px) {
   .cards-equidistant-container {
     grid-template-columns: minmax(0, 1fr);
-    padding-left: 14px;
-    padding-right: 14px;
+    padding: 10px 14px 32px;
+    gap: 16px;
+  }
+
+  .about-slide-container,
+  .contact-slide-container {
+    padding: 10px 10px 30px;
     gap: 16px;
   }
 }
 
-/* ==========================================================================
-   About Section - In-page sliding layout
-   ========================================================================== */
 .about-slide-container {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
   z-index: 5;
@@ -913,6 +995,8 @@
   box-sizing: border-box;
   align-items: center;
   overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
   scrollbar-color: rgba(195, 107, 126, 0.35) transparent;
   visibility: hidden;
@@ -1039,14 +1123,9 @@
 
 
 
-/* ==========================================================================
-   Contact Section - In-page sliding layout
-   ========================================================================== */
 .contact-slide-container {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
   z-index: 5;
@@ -1057,6 +1136,8 @@
   box-sizing: border-box;
   align-items: center;
   overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
   scrollbar-color: rgba(195, 107, 126, 0.35) transparent;
   visibility: hidden;
