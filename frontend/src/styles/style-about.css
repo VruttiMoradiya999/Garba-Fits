@@ -3,92 +3,81 @@
    ========================================================================== */
 
 .about-page-container {
-  padding: 30px 24px 70px;
+  padding: clamp(16px, 3vw, 36px) clamp(12px, 2.5vw, 24px) 60px;
   max-width: 1200px;
   margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Hero Box Container */
 .about-hero-box {
   background: #FFFFFF;
-  border-radius: 32px;
+  border-radius: clamp(20px, 3vw, 32px);
   border: 1.5px solid rgba(227, 174, 186, 0.45);
   box-shadow: 0 16px 45px rgba(45, 49, 66, 0.08);
-  padding: clamp(28px, 4vw, 52px);
+  padding: clamp(20px, 3.5vw, 48px);
   position: relative;
   overflow: hidden;
-  margin-bottom: 40px;
+  margin-bottom: clamp(24px, 4vw, 40px);
 }
 
 /* Vector Layout Grid */
 .about-vector-layout {
   display: grid;
-  grid-template-columns: 0.85fr 1.35fr;
-  gap: clamp(20px, 3.5vw, 44px);
+  grid-template-columns: 0.9fr 1.25fr;
+  gap: clamp(24px, 3.5vw, 44px);
   align-items: center;
   width: 100%;
   position: relative;
 }
 
-@media (max-width: 900px) {
-  .about-vector-layout {
-    grid-template-columns: 1fr;
-    gap: 28px;
-  }
-
-  .about-vector-left {
-    padding-left: 0;
-    max-width: 100%;
-  }
-}
-
 .about-vector-left {
   display: flex;
-  padding-left: 0.5rem;
   flex-direction: column;
   align-items: flex-start;
   z-index: 2;
-  max-width: 500px;
+  max-width: 520px;
   width: 100%;
 }
 
 .about-big-heading {
   font-family: var(--font-sans);
-  font-size: clamp(2.4rem, 4vw, 3.4rem);
+  font-size: clamp(2rem, 4.5vw, 3.4rem);
   font-weight: 900;
   color: #273760;
   letter-spacing: -0.5px;
-  line-height: 1.08;
+  line-height: 1.1;
   margin: 0 0 10px 0;
   text-transform: uppercase;
 }
 
 .about-heading-bar {
-  width: 110px;
+  width: 90px;
   height: 5px;
   background: #3E5EAB;
   border-radius: 4px;
-  margin-bottom: 20px;
+  margin-bottom: clamp(14px, 2vw, 20px);
 }
 
 .about-vector-desc {
-  font-size: 1.02rem;
+  font-size: clamp(0.95rem, 1.8vw, 1.05rem);
   line-height: 1.65;
   color: #4A5568;
   font-style: italic;
-  margin-bottom: 20px;
+  margin-bottom: clamp(12px, 2vw, 18px);
 }
 
 .about-vector-subtext {
   color: #6E7485;
-  font-size: 0.98rem;
+  font-size: clamp(0.88rem, 1.6vw, 0.98rem);
   line-height: 1.68;
-  margin-bottom: 28px;
+  margin-bottom: clamp(18px, 2.5vw, 28px);
 }
 
 .about-vector-btn {
-  padding: 14px 36px;
-  font-size: 1.05rem;
+  padding: 13px 32px;
+  font-size: 1rem;
   font-weight: 600;
   font-family: var(--font-sans);
   border-radius: var(--radius-pill);
@@ -125,19 +114,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 30px 10px;
+  padding: 36px 12px;
   width: 100%;
   max-width: 100%;
-  overflow: hidden;
   border-radius: 24px;
+  box-sizing: border-box;
 }
 
 .about-blob-backdrop {
   position: absolute;
-  top: -12%;
-  right: -6%;
-  width: 112%;
-  height: 124%;
+  top: -10%;
+  right: -5%;
+  width: 110%;
+  height: 120%;
   background: linear-gradient(135deg, #FFAAA6 0%, #FF8A8A 60%, #F57285 100%);
   border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
   z-index: 1;
@@ -152,7 +141,6 @@
     border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
     transform: scale(0.98) rotate(0deg);
   }
-
   100% {
     border-radius: 60% 40% 45% 55% / 50% 60% 40% 50%;
     transform: scale(1.02) rotate(3deg);
@@ -164,92 +152,60 @@
   z-index: 2;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  gap: clamp(12px, 2.5vw, 24px);
   width: 100%;
+  max-width: 540px;
   align-items: center;
-}
-
-@media (max-width: 580px) {
-  .about-owners-duo {
-    gap: 10px;
-  }
-
-  .owner-profile-card {
-    padding: 12px 8px 10px;
-    border-radius: 20px;
-  }
-
-  .owner-profile-card.stagger-up,
-  .owner-profile-card.stagger-down {
-    transform: none;
-  }
-
-  .owner-avatar-frame {
-    width: 100%;
-    max-width: 140px;
-    height: 150px;
-    border-radius: 16px;
-  }
-
-  .owner-floating-name {
-    font-size: 0.74rem;
-    padding: 3px 10px;
-    bottom: 8px;
-  }
-
-  .owner-social-btn {
-    width: 28px;
-    height: 28px;
-    border-radius: 8px;
-  }
 }
 
 .owner-profile-card {
   background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-radius: 26px;
+  border-radius: clamp(18px, 2.5vw, 26px);
   border: 2px solid rgba(255, 255, 255, 0.85);
   box-shadow: 0 14px 36px rgba(45, 49, 66, 0.14);
-  padding: 20px 16px 18px;
+  padding: clamp(14px, 2vw, 20px) clamp(10px, 1.5vw, 16px) clamp(12px, 1.8vw, 18px);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   box-sizing: border-box;
+  width: 100%;
 }
 
 /* Stagger one image up and another down side-by-side */
 .owner-profile-card.stagger-up {
-  transform: translateY(-28px);
+  transform: translateY(-24px);
 }
 
 .owner-profile-card.stagger-up:hover {
-  transform: translateY(-34px);
+  transform: translateY(-30px);
   box-shadow: 0 20px 45px rgba(45, 49, 66, 0.2);
   border-color: rgba(195, 107, 126, 0.65);
 }
 
 .owner-profile-card.stagger-down {
-  transform: translateY(28px);
+  transform: translateY(24px);
 }
 
 .owner-profile-card.stagger-down:hover {
-  transform: translateY(22px);
+  transform: translateY(18px);
   box-shadow: 0 20px 45px rgba(45, 49, 66, 0.2);
   border-color: rgba(195, 107, 126, 0.65);
 }
 
 .owner-avatar-frame {
-  width: 215px;
-  height: 235px;
-  max-width: 100%;
-  border-radius: 22px;
+  width: 100%;
+  max-width: 215px;
+  aspect-ratio: 1 / 1.1;
+  height: auto;
+  border-radius: clamp(14px, 2vw, 22px);
   overflow: hidden;
-  border: 4px solid #FFFFFF;
-  box-shadow: 0 12px 28px rgba(45, 49, 66, 0.16);
-  margin-bottom: 14px;
+  border: 3.5px solid #FFFFFF;
+  box-shadow: 0 10px 24px rgba(45, 49, 66, 0.14);
+  margin-bottom: clamp(10px, 1.5vw, 14px);
   background: #FFF0F3;
   position: relative;
 }
@@ -268,16 +224,16 @@
 
 .owner-floating-name {
   position: absolute;
-  bottom: 14px;
+  bottom: clamp(8px, 1.5vw, 14px);
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(39, 55, 96, 0.88);
+  background: rgba(39, 55, 96, 0.92);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   color: #FFFFFF;
-  padding: 6px 18px;
+  padding: 5px clamp(10px, 1.8vw, 16px);
   border-radius: var(--radius-pill);
-  font-size: 0.88rem;
+  font-size: clamp(0.72rem, 1.4vw, 0.86rem);
   font-weight: 700;
   letter-spacing: 0.3px;
   white-space: nowrap;
@@ -292,14 +248,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: clamp(6px, 1.2vw, 10px);
   width: 100%;
   padding-top: 4px;
 }
 
 .owner-social-btn {
-  width: 34px;
-  height: 34px;
+  width: clamp(32px, 4vw, 36px);
+  height: clamp(32px, 4vw, 36px);
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -308,6 +264,7 @@
   transition: all 0.2s ease;
   color: #555;
   background: #F4F6F9;
+  flex-shrink: 0;
 }
 
 .owner-social-btn.linkedin {
@@ -349,17 +306,19 @@
 /* Key Highlights Section */
 .about-features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: clamp(16px, 2.5vw, 24px);
+  width: 100%;
 }
 
 .about-perk-card {
   background: #FFFFFF;
-  padding: 28px 24px;
+  padding: clamp(20px, 3vw, 28px) clamp(16px, 2.5vw, 24px);
   border-radius: 22px;
   border: 1.5px solid rgba(227, 174, 186, 0.4);
   box-shadow: 0 8px 24px rgba(45, 49, 66, 0.06);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-sizing: border-box;
 }
 
 .about-perk-card:hover {
@@ -376,11 +335,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .about-perk-title {
-  font-size: 1.25rem;
+  font-size: clamp(1.1rem, 2vw, 1.25rem);
   margin-bottom: 8px;
   color: var(--color-charcoal);
   font-family: var(--font-sans);
@@ -391,4 +350,139 @@
   color: #6E7485;
   font-size: 0.92rem;
   line-height: 1.6;
+}
+
+/* ==========================================================================
+   Responsive Breakpoints for About Page
+   ========================================================================== */
+
+/* Tablet (max-width: 900px) */
+@media (max-width: 900px) {
+  .about-vector-layout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .about-vector-left {
+    padding-left: 0;
+    max-width: 100%;
+    align-items: flex-start;
+  }
+
+  .about-vector-right {
+    padding: 24px 8px;
+  }
+
+  .about-blob-backdrop {
+    width: 104%;
+    height: 114%;
+    top: -6%;
+    right: -2%;
+  }
+}
+
+/* Mobile & Small Screens (max-width: 600px) */
+@media (max-width: 600px) {
+  .about-page-container {
+    padding: 12px 12px 50px;
+  }
+
+  .about-hero-box {
+    padding: 20px 14px;
+    border-radius: 22px;
+    margin-bottom: 20px;
+  }
+
+  .about-vector-left {
+    padding: 1rem;
+  }
+
+  .about-vector-desc {
+    font-size: 0.94rem;
+    line-height: 1.55;
+    margin-bottom: 12px;
+  }
+
+  .about-vector-subtext {
+    font-size: 0.88rem;
+    line-height: 1.55;
+    margin-bottom: 20px;
+  }
+
+  .about-vector-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 24px;
+  }
+
+  .about-vector-right {
+    padding: 14px 4px;
+  }
+
+  .about-owners-duo {
+    gap: 10px;
+  }
+
+  .owner-profile-card {
+    padding: 12px 8px 12px;
+    border-radius: 18px;
+  }
+
+  /* Remove heavy stagger translation on mobile so cards don't clip */
+  .owner-profile-card.stagger-up,
+  .owner-profile-card.stagger-down {
+    transform: none;
+  }
+
+  .owner-profile-card.stagger-up:hover,
+  .owner-profile-card.stagger-down:hover {
+    transform: translateY(-4px);
+  }
+
+  .owner-avatar-frame {
+    border-radius: 14px;
+    border-width: 2.5px;
+    margin-bottom: 8px;
+  }
+
+  .owner-floating-name {
+    font-size: 0.72rem;
+    padding: 3px 8px;
+    bottom: 6px;
+  }
+
+  .owner-social-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+  }
+
+  .owner-social-btn svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .about-features-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .about-perk-card {
+    padding: 18px 16px;
+    border-radius: 18px;
+  }
+}
+
+/* Extra Small Screens (max-width: 380px) */
+@media (max-width: 380px) {
+  .about-owners-duo {
+    grid-template-columns: 1fr;
+    max-width: 240px;
+    margin: 0 auto;
+    gap: 16px;
+  }
+
+  .owner-avatar-frame {
+    max-width: 200px;
+  }
 }

@@ -951,14 +951,6 @@
     row-gap: 20px;
   }
 
-  .about-slide-container,
-  .contact-slide-container {
-    grid-template-columns: 1fr;
-    padding: 14px 14px 36px;
-    gap: 20px;
-    align-items: start;
-  }
-
   .view-modal-grid {
     grid-template-columns: 1fr;
   }
@@ -974,22 +966,18 @@
     padding: 10px 14px 32px;
     gap: 16px;
   }
-
-  .about-slide-container,
-  .contact-slide-container {
-    padding: 10px 10px 30px;
-    gap: 16px;
-  }
 }
 
-.about-slide-container {
+/* Base slide containers for About and Contact views */
+.about-slide-container,
+.contact-slide-container {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   z-index: 5;
   display: grid;
-  grid-template-columns: 1.15fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: clamp(20px, 3vw, 40px);
   padding: clamp(20px, 3vw, 40px);
   box-sizing: border-box;
@@ -1004,7 +992,9 @@
 }
 
 .about-panel-left,
-.about-panel-right {
+.about-panel-right,
+.contact-panel-left,
+.contact-panel-right {
   display: flex;
   flex-direction: column;
   gap: 18px;
@@ -1120,37 +1110,36 @@
   line-height: 1.5;
 }
 
+/* Responsive queries for in-page slide panels (About & Contact) */
+@media (max-width: 900px) {
+  .about-slide-container,
+  .contact-slide-container {
+    grid-template-columns: 1fr;
+    padding: 20px 16px 48px;
+    gap: 28px;
+    align-items: start;
+    overflow-y: auto;
+  }
 
+  .about-panel-left,
+  .about-panel-right,
+  .contact-panel-left,
+  .contact-panel-right {
+    gap: 16px;
+  }
 
-
-.contact-slide-container {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 5;
-  display: grid;
-  grid-template-columns: 1.15fr 1fr;
-  gap: clamp(20px, 3vw, 40px);
-  padding: clamp(20px, 3vw, 40px);
-  box-sizing: border-box;
-  align-items: center;
-  overflow-y: auto;
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(195, 107, 126, 0.35) transparent;
-  visibility: hidden;
-  pointer-events: none;
+  .contact-form-col {
+    align-items: center;
+    text-align: center;
+  }
 }
 
-.contact-panel-left,
-.contact-panel-right {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  will-change: transform, opacity;
-  width: 100%;
+@media (max-width: 580px) {
+  .about-slide-container,
+  .contact-slide-container {
+    padding: 14px 12px 40px;
+    gap: 20px;
+  }
 }
 
 .contact-form-card {
